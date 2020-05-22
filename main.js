@@ -278,7 +278,8 @@ function response(room, msg, sender, isGroupChat, replier) {
 			} else {
 				replier.reply('[ 오늘 시간표('+fixedweek+'요일) ]\n'+'\n'+
 				'( 이스터에그 ~오늘은?~ )\n'+
-				'- 그거 아세요? 오늘 쉬는날임 엌ㅋㅋㅋㅋㅋ'+
+				'- 축하합니다! 이스터에그를 찾으셨습니다!\n'+
+				'= 그거 아세요? 오늘 쉬는날임 엌ㅋㅋㅋㅋㅋ\n'+
 				'= 오늘 수업 안함 ㅋㅋ루삥뽕');
 			}
 		} else if(msg=="!과목") {
@@ -317,13 +318,13 @@ function response(room, msg, sender, isGroupChat, replier) {
 			} else if(tnow.getHours()==11 && tnow.getMinutes()>=40 && tnow.getMinutes()<60) {
 				var classnum=4; //4교시
 				var pre=" ]";
-			} else if(tnow.getHours()==12 && tnow.getMinutes()>=0 && tnow.getMinutes()<10) {
+			} else if(tnow.getHours()==12 && tnow.getMinutes()>=0 && tnow.getMinutes()<15) {
 				var classnum=4; //4교시
 				var pre=" ]";
-			} else if(tnow.getHours()==12 && tnow.getMinutes()>=10 && tnow.getMinutes()<15) {
+			} else if(tnow.getHours()==12 && tnow.getMinutes()>=15 && tnow.getMinutes()<15) {
 				var classnum=99; //점심 5분전
 				var pre="(예비) ]";
-			} else if(tnow.getHours()==12 && tnow.getMinutes()>=15 && tnow.getMinutes()<60) {
+			} else if(tnow.getHours()==12 && tnow.getMinutes()>=20 && tnow.getMinutes()<60) {
 				var classnum=99; //점심
 				var pre=" ]";
 			} else if(tnow.getHours()==13 && tnow.getMinutes()>=0 && tnow.getMinutes()<15) {
@@ -382,7 +383,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 			} else {
 				var fixedclassnum = classnum;
 			}
-			var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclass.php?week="+week+"&classnum="+classnum).get().select("classname").text();
+			var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclass.php?week="+week+"&classnum="+classnum).get().select("classname").text();	
 			var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclass.php?week="+week+"&classnum="+classnum).get().select("classlink").text();
 			var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
 			if(curweek==1) {
@@ -443,23 +444,29 @@ function response(room, msg, sender, isGroupChat, replier) {
 			'- !과목'+'\n'+
 			'= 지금 수업중이거나, 2~10분 뒤에 시작할 수업의 과목에 대한 정보를 출력합니다.'+'\n'+'\n'+
 			'- !학생정보 <(240)1~(24)27/김강민~황재성>'+'\n'+
-			'= 꺾쇠 안의 조건에 따라, 학생정보 및 이상적인 줌 이름을 출력합니다.'+'\n'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 학생정보를 출력합니다.'+'\n'+'\n'+
 			'- !코로나 현황'+'\n'+
 			'= 당일 1시 기준 코로나 관련 정보를 출력합니다.'+'\n'+'\n'+
 			'- !과제영상'+'\n'+
 			'= 클래스팅 과제 파일 올리는 방법(링크)를 출력합니다.'+'\n'+'\n'+
+			'- !영상편집'+'\n'+
+			'= 시낭송 영상 편집하는 방법(링크)를 출력합니다.'+'\n'+'\n'+
 			'- !시간'+'\n'+
-			'= 현제 시간을 출력합니다.');
+			'= 현제 시간을 출력합니다.'+'\n'+'\n'+
+			'- !봇정보'+'\n'+
+			'= 봇의 정보를 출력합니다.');
 		} else if(msgsp[0]=="!학생정보") {
 			var inttype = /^[0-9]/; 
 			var hangultype = /^[가-힣]/; 
 			var strnallow = false;
 			if(inttype.test(msgstu)) {
-				var studentnumber = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getnumber.php?stunum="+msgstu).get().select("studentnumber").text();
-				var studentname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getnumber.php?stunum="+msgstu).get().select("studentname").text();
+				var studentnumber = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stunum="+msgstu).get().select("studentnumber").text();
+				var studentname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stunum="+msgstu).get().select("studentname").text();
+				var studentclub = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stunum="+msgstu).get().select("studentclub").text();
 			} else if (hangultype.test(msgstu)) {
-				var studentnumber = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getnumber.php?stuname="+msgstu).get().select("studentnumber").text();
-				var studentname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getnumber.php?stuname="+msgstu).get().select("studentname").text();
+				var studentnumber = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stuname="+msgstu).get().select("studentnumber").text();
+				var studentname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stuname="+msgstu).get().select("studentname").text();
+				var studentclub = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getstuinfo.php?stuname="+msgstu).get().select("studentclub").text();
 			} else {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 허용되지 않은 문자열입니다!');
@@ -475,7 +482,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 								'( '+msgstu+'의 검색 결과 )\n'+
 								'- 이름 : '+studentname+'\n'+
 								'- 학번 : '+studentnumber+'\n'+
-								'- 줌 이름 : '+studentnumber+' '+studentname);
+								'- 동아리 : '+studentclub);
 			}
 		} else if(msg=="!코로나 현황") {
 			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("date").text();
@@ -513,6 +520,24 @@ function response(room, msg, sender, isGroupChat, replier) {
 			let tnow = new Date();
 			replier.reply('[ 시간 ]'+'\n'+'\n'+
 			'- 현제 시간은 '+tnow.getHours()+':'+tnow.getMinutes()+' 입니다!');
+		} else if(msg=="!봇정보") {
+			replier.reply('[ 봇정보 ]\n'+'\n'+
+							'- 이름 : 비공식_신흥봇_2-4\n'+
+							'- 버전 : 2020.5.4f2\n'+
+							'- 깃헙 : https://go.h2owr.xyz/kakaobgh\n'+
+							'- 라이센스 : https://go.h2owr.xyz/kakaoblc\n'+
+							'= Made by KKM');
+		} else if(msg=="!미안하다이거보여주려고어그로끌었다") {
+			replier.reply('( 이스터에그 ~미안하다...~ )\n- 축하합니다! 이스터에그를 찾으셨습니다!\n나루토랑 나루토 싸움 수준 ㄹㅇ 실화냐?\n진짜 세계관 최강자의 싸움이다\nhttps://go.h2owr.xyz/fightlevelreal');
+		} else if(msg=="!영상편집") {
+			replier.reply('[ 영상 ]'+'\n'+'\n'+
+			'- 시낭송 영상 편집하는 방법'+'\n'+
+			'= https://go.h2owr.xyz/howtoeditpvi');
+		} else if(msg=="!동물정보 개구리") {
+			replier.reply('[ 학생정보 ]\n'+'\n'+
+			'( 이스터에그 ~개구리의 검색결과~ )\n'+
+			'- 축하합니다! 이스터에그를 찾으셨습니다!\n'+
+			'= 선생님 '+sender+' 학생이 별명써요!!!!!');
 		}
 	}
 }
