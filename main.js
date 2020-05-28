@@ -471,7 +471,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 허용되지 않은 문자열입니다!');
 				var strnallow = true;
-			}		
+			}
 			if(typeof studentnumber == "undefined" || studentnumber == null || studentnumber == "") {
 				if(!strnallow) {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
@@ -538,6 +538,67 @@ function response(room, msg, sender, isGroupChat, replier) {
 			'( 이스터에그 ~개구리의 검색결과~ )\n'+
 			'- 축하합니다! 이스터에그를 찾으셨습니다!\n'+
 			'= 선생님 '+sender+' 학생이 별명써요!!!!!');
+		} else if(msgsp[0]=="!과목정보") {
+			var hangultype = /^[가-힣]/; 
+			if (hangultype.test(msgstu)) {
+				if(msgstu=='과학') {
+					var msgstu = 1;
+				} else if(msgstu=='국어') {
+					var msgstu = 2;
+				} else if(msgstu=='기술가정') {
+					var msgstu = 3;
+				} else if(msgstu=='기가') {
+					var msgstu = 3;
+				} else if(msgstu=='도덕') {
+					var msgstu = 4;
+				} else if(msgstu=='미술') {
+					var msgstu = 5;
+				} else if(msgstu=='수학') {
+					var msgstu = 6;
+				} else if(msgstu=='역사A') {
+					var msgstu = 7;
+				} else if(msgstu=='역사B') {
+					var msgstu = 8;
+				} else if(msgstu=='영어') {
+					var msgstu = 9;
+				} else if(msgstu=='음악') {
+					var msgstu = 10;
+				} else if(msgstu=='중국어') {
+					var msgstu = 11;
+				} else if(msgstu=='창체진로') {
+					var msgstu = 12;
+				} else if(msgstu=='진로') {
+					var msgstu = 12;
+				} else if(msgstu=='체육') {
+					var msgstu = 13;
+				} else if(msgstu=='스포츠 클럽') {
+					var msgstu = 14;
+				} else if(msgstu=='스포츠클럽') {
+					var msgstu = 14;
+				} else if(msgstu=='스클') {
+					var msgstu = 14;
+				} else if(msgstu=='조회') {
+					var msgstu = 97;
+				} else if(msgstu=='종례') {
+					var msgstu = 99;
+				} else {
+					replier.reply('[ 오류 ]'+'\n'+'\n'+
+					'- 허용되지 않은 단어입니다!');
+					var strnallow = true;
+				}
+				if(typeof strnallow != "undefined" || strnallow != null || strnallow != "") {
+					if(strnallow != true) {
+						var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasssp.php?classnum="+msgstu).get().select("class").text();
+						var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasssp.php?classnum="+msgstu).get().select("classlink").text();
+						replier.reply('[ 과목정보 ]\n'+'\n'+
+						'- '+classname+'\n'+
+						'= '+classlink);
+					}
+				}
+			} else {
+				replier.reply('[ 오류 ]'+'\n'+'\n'+
+				'- 허용되지 않은 문자열입니다!');
+			}
 		}
 	}
 }
