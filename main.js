@@ -585,7 +585,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 					var msgstu = 99;
 				} else {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
-					'- 허용되지 않은 단어입니다!');
+					'- 존재하지 않는 과목입니다!');
 					var strnallow = true;
 				}
 				if(typeof strnallow != "undefined" || strnallow != null || strnallow != "") {
