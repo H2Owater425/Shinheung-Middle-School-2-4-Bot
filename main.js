@@ -454,7 +454,9 @@ function response(room, msg, sender, isGroupChat, replier) {
 			'- !시간'+'\n'+
 			'= 현제 시간을 출력합니다.'+'\n'+'\n'+
 			'- !봇정보'+'\n'+
-			'= 봇의 정보를 출력합니다.');
+			'= 봇의 정보를 출력합니다.'+'\n'+'\n'+
+			'- !과목정보 <과학~종례>'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 과목정보를 출력합니다.');
 		} else if(msgsp[0]=="!학생정보") {
 			var inttype = /^[0-9]/; 
 			var hangultype = /^[가-힣]/; 
