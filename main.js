@@ -454,7 +454,9 @@ export function response(room, msg, sender, isGroupChat, replier) {
 			'- !시간'+'\n'+
 			'= 현제 시간을 출력합니다.'+'\n'+'\n'+
 			'- !봇정보'+'\n'+
-			'= 봇의 정보를 출력합니다.');
+			'= 봇의 정보를 출력합니다.'+'\n'+'\n'+
+			'- !과목정보 <과학~종례>'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 과목정보를 출력합니다.');
 		} else if(msgsp[0]=="!학생정보") {
 			var inttype = /^[0-9]/; 
 			var hangultype = /^[가-힣]/; 
@@ -619,7 +621,7 @@ export function response(room, msg, sender, isGroupChat, replier) {
 					var classtime = '월~목요일 6.5교시, 금요알 7.5교시';
 				} else {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
-					'- 허용되지 않은 단어입니다!');
+					'- 존재하지 않는 과목입니다!');
 					var strnallow = true;
 				}
 				if(typeof strnallow != "undefined" || strnallow != null || strnallow != "") {
