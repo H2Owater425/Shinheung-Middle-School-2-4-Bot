@@ -1,4 +1,4 @@
-export function response(room, msg, sender, isGroupChat, replier) {
+function response(room, msg, sender, isGroupChat, replier) {
 	msg = msg.trim();
 	var msgsp = msg.split(" ");
 	var msgstu = msg.substring(6);
