@@ -1,4 +1,4 @@
-function response(room, msg, sender, isGroupChat, replier) {
+export function response(room, msg, sender, isGroupChat, replier) {
 	msg = msg.trim();
 	var msgsp = msg.split(" ");
 	var msgstu = msg.substring(6);
@@ -543,44 +543,80 @@ function response(room, msg, sender, isGroupChat, replier) {
 			if (hangultype.test(msgstu)) {
 				if(msgstu=='과학') {
 					var msgstu = 1;
+					var teachername = '김상희';
+					var classtime = '화요일 2교시, 목요일 6교시, 금요일 1교시';
 				} else if(msgstu=='국어') {
 					var msgstu = 2;
+					var teachername = '김경삼';
+					var classtime = '월요일 5교시, 수요일 6교시, 금요일 2교시';
 				} else if(msgstu=='기술가정') {
 					var msgstu = 3;
+					var teachername = '안형웅';
+					var classtime = '화요일 2교시, 수요일 5교시, 목요일 4교시';
 				} else if(msgstu=='기가') {
 					var msgstu = 3;
+					var teachername = '안형웅';
+					var classtime = '화요일 2교시, 수요일 5교시, 목요일 4교시';
 				} else if(msgstu=='도덕') {
 					var msgstu = 4;
+					var teachername = '김세미';
+					var classtime = '화요일 6교시, 금요일 6교시';
 				} else if(msgstu=='미술') {
 					var msgstu = 5;
+					var teachername = '김예린';
+					var classtime = '월요일 6교시, 수요일 1교시';
 				} else if(msgstu=='수학') {
 					var msgstu = 6;
+					var teachername = '안성호';
+					var classtime = '화요일 1교시, 수요일 4교시, 목요일 3교시';
 				} else if(msgstu=='역사A') {
 					var msgstu = 7;
+					var teachername = '박경석';
+					var classtime = '목요일 2교시';
 				} else if(msgstu=='역사B') {
 					var msgstu = 8;
+					var teachername = '이승은';
+					var classtime = '월요일 2교시, 금요일 7교시';
 				} else if(msgstu=='영어') {
 					var msgstu = 9;
+					var teachername = '이혜진';
+					var classtime = '월요일 3교시, 수요일 2교시, 금요일 3교시';
 				} else if(msgstu=='음악') {
 					var msgstu = 10;
+					var teachername = '이윤정';
+					var classtime = '월요일 4교시, 금요일 4교시';
 				} else if(msgstu=='중국어') {
 					var msgstu = 11;
+					var teachername = '최윤정';
+					var classtime = '월요일 1교시, 목요일 1교시, 금요일 5교시';
 				} else if(msgstu=='창체진로') {
 					var msgstu = 12;
+					var teachername = '김경삼';
+					var classtime = '목요일 5교시';
 				} else if(msgstu=='진로') {
 					var msgstu = 12;
+					var teachername = '김경삼';
+					var classtime = '목요일 5교시';
 				} else if(msgstu=='체육') {
 					var msgstu = 13;
-				} else if(msgstu=='스포츠 클럽') {
-					var msgstu = 14;
+					var teachername = '이경남';
+					var classtime = '화요일 5교시, 수요일 3교시';
 				} else if(msgstu=='스포츠클럽') {
 					var msgstu = 14;
+					var teachername = '박경석';
+					var classtime = '화요일 4교시';
 				} else if(msgstu=='스클') {
 					var msgstu = 14;
+					var teachername = '박경석';
+					var classtime = '화요일 4교시';
 				} else if(msgstu=='조회') {
 					var msgstu = 97;
+					var teachername = '최윤정';
+					var classtime = '월~금요일 0.5교시';
 				} else if(msgstu=='종례') {
 					var msgstu = 99;
+					var teachername = '최윤정';
+					var classtime = '월~목요일 6.5교시, 금요알 7.5교시';
 				} else {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
 					'- 허용되지 않은 단어입니다!');
@@ -591,14 +627,17 @@ function response(room, msg, sender, isGroupChat, replier) {
 						var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasssp.php?classnum="+msgstu).get().select("class").text();
 						var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasssp.php?classnum="+msgstu).get().select("classlink").text();
 						replier.reply('[ 과목정보 ]\n'+'\n'+
-						'- '+classname+'\n'+
-						'= '+classlink);
+										'( 과목 '+classname+'의 정보 )\n'+
+										'- 선생님 : '+teachername+'쌤\n'+
+										'- 링크 : '+classlink+'\n'+
+										'- 교시 : '+classtime);
 					}
 				}
 			} else {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 허용되지 않은 문자열입니다!');
 			}
+		} else if(msgsp[0]=="!과목검색") {
 		}
 	}
 }
