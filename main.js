@@ -908,6 +908,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 				}
 				if(typeof strnallow != "undefined" || strnallow != null || strnallow != "") {
 					if(strnallow != true) {
+						var classname = msgstu; 
 						replier.reply('[ 과목검색 ]\n'+'\n'+
 							'( 과목 '+classname+'의 정보 )\n'+
 							'- '+classname+'가 포함된 교시\n'+
