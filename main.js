@@ -616,7 +616,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 				} else if(msgstu=='종례') {
 					var msgstu = 99;
 					var teachername = '최윤정';
-					var classtime = '월~목요일 6.5교시, 금요알 7.5교시';
+					var classtime = '월~목요일 6.5교시, 금요일 7.5교시';
 				} else {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
 					'- 허용되지 않은 단어입니다!');
@@ -638,6 +638,286 @@ function response(room, msg, sender, isGroupChat, replier) {
 				'- 허용되지 않은 문자열입니다!');
 			}
 		} else if(msgsp[0]=="!과목검색") {
+			var week = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
+			var hangultype = /^[가-힣]/; 
+			if (hangultype.test(msgstu)) {
+				if(week==1) {
+					if(msgstu=='과학') {
+						var classtime = '없음';
+					} else if(msgstu=='국어') {
+						var classtime = '5교시';
+					} else if(msgstu=='기술가정') {
+						var classtime = '없음';
+					} else if(msgstu=='기가') {
+						var classtime = '없음';
+					} else if(msgstu=='도덕') {
+						var classtime = '없음';
+					} else if(msgstu=='미술') {
+						var classtime = '6교시';
+					} else if(msgstu=='수학') {
+						var classtime = '없음';
+					} else if(msgstu=='역사A') {
+						var classtime = '없음';
+					} else if(msgstu=='역사B') {
+						var classtime = '2교시';
+					} else if(msgstu=='영어') {
+						var classtime = '3교시';
+					} else if(msgstu=='음악') {
+						var classtime = '4교시';
+					} else if(msgstu=='중국어') {
+						var classtime = '1교시';
+					} else if(msgstu=='창체진로') {
+						var classtime = '없음';
+					} else if(msgstu=='진로') {
+						var classtime = '없음';
+					} else if(msgstu=='체육') {
+						var classtime = '없음';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '없음';
+					} else if(msgstu=='스클') {
+						var classtime = '없음';
+					} else if(msgstu=='조회') {
+						var classtime = '0.5교시';
+					} else if(msgstu=='종례') {
+						var classtime = '6.5교시';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				} else if(week==2) {
+					if(msgstu=='과학') {
+						var classtime = '2교시';
+					} else if(msgstu=='국어') {
+						var classtime = '없음';
+					} else if(msgstu=='기술가정') {
+						var classtime = '2교시';
+					} else if(msgstu=='기가') {
+						var classtime = '2교시';
+					} else if(msgstu=='도덕') {
+						var classtime = '6교시';
+					} else if(msgstu=='미술') {
+						var classtime = '없음';
+					} else if(msgstu=='수학') {
+						var classtime = '1교시';
+					} else if(msgstu=='역사A') {
+						var classtime = '없음';
+					} else if(msgstu=='역사B') {
+						var classtime = '없음';
+					} else if(msgstu=='영어') {
+						var classtime = '없음';
+					} else if(msgstu=='음악') {
+						var classtime = '없음';
+					} else if(msgstu=='중국어') {
+						var classtime = '없음';
+					} else if(msgstu=='창체진로') {
+						var classtime = '없음';
+					} else if(msgstu=='진로') {
+						var classtime = '없음';
+					} else if(msgstu=='체육') {
+						var classtime = '5교시';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '4교시';
+					} else if(msgstu=='스클') {
+						var classtime = '4교시';
+					} else if(msgstu=='조회') {
+						var classtime = '0.5교시';
+					} else if(msgstu=='종례') {
+						var classtime = '6.5교시';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				} else if(week==3) {
+					if(msgstu=='과학') {
+						var classtime = '없음';
+					} else if(msgstu=='국어') {
+						var classtime = '6교시';
+					} else if(msgstu=='기술가정') {
+						var classtime = '5교시';
+					} else if(msgstu=='기가') {
+						var classtime = '5교시';
+					} else if(msgstu=='도덕') {
+						var classtime = '없음';
+					} else if(msgstu=='미술') {
+						var classtime = '1교시';
+					} else if(msgstu=='수학') {
+						var classtime = '4교시';
+					} else if(msgstu=='역사A') {
+						var classtime = '없음';
+					} else if(msgstu=='역사B') {
+						var classtime = '없음';
+					} else if(msgstu=='영어') {
+						var classtime = '2교시';
+					} else if(msgstu=='음악') {
+						var classtime = '없음';
+					} else if(msgstu=='중국어') {
+						var classtime = '없음';
+					} else if(msgstu=='창체진로') {
+						var classtime = '없음';
+					} else if(msgstu=='진로') {
+						var classtime = '없음';
+					} else if(msgstu=='체육') {
+						var classtime = '3교시';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '없음';
+					} else if(msgstu=='스클') {
+						var classtime = '없음';
+					} else if(msgstu=='조회') {
+						var classtime = '0.5교시';
+					} else if(msgstu=='종례') {
+						var classtime = '6.5교시';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				} else if(week==4) {
+					if(msgstu=='과학') {
+						var classtime = '6교시';
+					} else if(msgstu=='국어') {
+						var classtime = '없음';
+					} else if(msgstu=='기술가정') {
+						var classtime = '4교시';
+					} else if(msgstu=='기가') {
+						var classtime = '4교시';
+					} else if(msgstu=='도덕') {
+						var classtime = '없음';
+					} else if(msgstu=='미술') {
+						var classtime = '없음';
+					} else if(msgstu=='수학') {
+						var classtime = '3교시';
+					} else if(msgstu=='역사A') {
+						var classtime = '2교시';
+					} else if(msgstu=='역사B') {
+						var classtime = '없음';
+					} else if(msgstu=='영어') {
+						var classtime = '없음';
+					} else if(msgstu=='음악') {
+						var classtime = '없음';
+					} else if(msgstu=='중국어') {
+						var classtime = '1교시';
+					} else if(msgstu=='창체진로') {
+						var classtime = '5교시';
+					} else if(msgstu=='진로') {
+						var classtime = '5교시';
+					} else if(msgstu=='체육') {
+						var classtime = '없음';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '없음';
+					} else if(msgstu=='스클') {
+						var classtime = '없음';
+					} else if(msgstu=='조회') {
+						var classtime = '0.5교시';
+					} else if(msgstu=='종례') {
+						var classtime = '6.5교시';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				} else if(week==5) {
+					if(msgstu=='과학') {
+						var classtime = '1교시';
+					} else if(msgstu=='국어') {
+						var classtime = '2교시';
+					} else if(msgstu=='기술가정') {
+						var classtime = '없음';
+					} else if(msgstu=='기가') {
+						var classtime = '없음';
+					} else if(msgstu=='도덕') {
+						var classtime = '6교시';
+					} else if(msgstu=='미술') {
+						var classtime = '없음';
+					} else if(msgstu=='수학') {
+						var classtime = '없음';
+					} else if(msgstu=='역사A') {
+						var classtime = '없음';
+					} else if(msgstu=='역사B') {
+						var classtime = '7교시';
+					} else if(msgstu=='영어') {
+						var classtime = '3교시';
+					} else if(msgstu=='음악') {
+						var classtime = '4교시';
+					} else if(msgstu=='중국어') {
+						var classtime = '5교시';
+					} else if(msgstu=='창체진로') {
+						var classtime = '없음';
+					} else if(msgstu=='진로') {
+						var classtime = '없음';
+					} else if(msgstu=='체육') {
+						var classtime = '없음';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '없음';
+					} else if(msgstu=='스클') {
+						var classtime = '없음';
+					} else if(msgstu=='조회') {
+						var classtime = '0.5교시';
+					} else if(msgstu=='종례') {
+						var classtime = '7.5교시';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				} else {
+					if(msgstu=='과학') {
+						var classtime = '없음';
+					} else if(msgstu=='국어') {
+						var classtime = '없음';
+					} else if(msgstu=='기술가정') {
+						var classtime = '없음';
+					} else if(msgstu=='기가') {
+						var classtime = '없음';
+					} else if(msgstu=='도덕') {
+						var classtime = '없음';
+					} else if(msgstu=='미술') {
+						var classtime = '없음';
+					} else if(msgstu=='수학') {
+						var classtime = '없음';
+					} else if(msgstu=='역사A') {
+						var classtime = '없음';
+					} else if(msgstu=='역사B') {
+						var classtime = '없음';
+					} else if(msgstu=='영어') {
+						var classtime = '없음';
+					} else if(msgstu=='음악') {
+						var classtime = '없음';
+					} else if(msgstu=='중국어') {
+						var classtime = '없음';
+					} else if(msgstu=='창체진로') {
+						var classtime = '없음';
+					} else if(msgstu=='진로') {
+						var classtime = '없음';
+					} else if(msgstu=='체육') {
+						var classtime = '없음';
+					} else if(msgstu=='스포츠클럽') {
+						var classtime = '없음';
+					} else if(msgstu=='스클') {
+						var classtime = '없음';
+					} else if(msgstu=='조회') {
+						var classtime = '없음';
+					} else if(msgstu=='종례') {
+						var classtime = '없음';
+					} else {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'- 허용되지 않은 단어입니다!');
+						var strnallow = true;
+					}
+				}
+				if(typeof strnallow != "undefined" || strnallow != null || strnallow != "") {
+					if(strnallow != true) {
+						replier.reply('[ 과목검색 ]\n'+'\n'+
+							'( 과목 '+classname+'의 정보 )\n'+
+							'- '+classname+'가 포함된 교시\n'+
+							'= '+classtime);
+					}
+				}
+			} else {
+				replier.reply('[ 오류 ]'+'\n'+'\n'+
+				'- 허용되지 않은 문자열입니다!');
+			}
 		}
 	}
 }
