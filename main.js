@@ -719,7 +719,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 허용되지 않은 문자열입니다!');
 			}
-		} else if(msg=="!책준비") {
+		} else if(msg=="!책목록") {
 			var week = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
 			if(week==1) {
 				var fixedweek = '월';
