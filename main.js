@@ -434,7 +434,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		} else {
 			replier.reply('[ 현재 과목'+pre+'\n'+'\n'+
 			'( '+fixedclassnum+'교시 / '+fixedcurweek+'요일 / '+classtime+' )\n'+
-			'- '+classname+'\n'+
+			'- '+classname+'('+newclassnum+')\n'+
 			'= '+classlink);
 		}
 	} else if(msg=="!도움말") {
