@@ -367,25 +367,31 @@ function response(room, msg, sender, isGroupChat, replier) {
 			if(classnum==0) {
 				var fixedclassnum = "0.5"
 				var week = 0;
-				var classnum = 1;
+				var fixedclassnum = 1;
 			} else if(classnum==99) {
 				var fixedclassnum = "4.5"
 				var week = 0;
-				var classnum = 2;
+				var fixedclassnum = 2;
 			} else if(classnum==97) {
 				var fixedclassnum = "6.5"
 				var week = 0;
-				var classnum = 3;
+				var fixedclassnum = 3;
 			} else if(classnum==98) {
 				var fixedclassnum = "7.5"
 				var week = 0;
-				var classnum = 3;
+				var fixedclassnum = 3;
 			} else {
 				var fixedclassnum = classnum;
 			}
-			var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+classnum).get().select("classname").text();	
-			var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+classnum).get().select("classlink").text();
-			var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
+			if(classnum!=0 && classnum!=99 && classnum!=97 && classnum!=98) {
+				var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classname").text();	
+				var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classlink").text();
+				var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
+			} else {
+				var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classname").text();	
+				var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classlink").text();
+				var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
+			}
 			if(curweek==1) {
 				var fixedcurweek = '월';
 			} else if(curweek==2) {
@@ -456,9 +462,11 @@ function response(room, msg, sender, isGroupChat, replier) {
 			'- !봇정보'+'\n'+
 			'= 봇의 정보를 출력합니다.'+'\n'+'\n'+
 			'- !과목정보 <국어~종례>'+'\n'+
-			'= 꺾쇠 안의 조건에 따라, 과목정보 출력합니다.'+'\n'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 과목정보를 출력합니다.'+'\n'+'\n'+
 			'- !과목검색 <국어~종례>'+'\n'+
 			'= 꺾쇠 안의 조건에 따라, 해당 과목이 무슨 교시인지를 출력합니다.'+'\n'+'\n'+
+			'- !<월~금>요일 책목록'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 해당 요일에 준비해야 하는 책의 목록을 출력합니다.'+'\n'+'\n'+
 			'- !책목록'+'\n'+
 			'= 해당 요일에 준비해야 하는 책의 목록을 출력합니다.');
 		} else if(msgsp[0]=="!학생정보") {
@@ -746,6 +754,36 @@ function response(room, msg, sender, isGroupChat, replier) {
 				'- 책 목록\n'+
 				'= '+booklist);
 			}
+		} else if(msg=="!월요일 책목록") {
+			var fixedweek = '월';
+			var booklist = '국어 2-1\n= 미술 2\n= 역사 1\n= 영어 2\n= 음악 1\n= 생활 중국어';
+			replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+			'- 책 목록\n'+
+			'= '+booklist);
+		} else if(msg=="!화요일 책목록") {
+			var fixedweek = '화';
+			var booklist = '과학 2\n= 기술가정 2\n= 도덕 2\n= 수학 2\n= 체육 1/2';
+			replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+			'- 책 목록\n'+
+			'= '+booklist);
+		} else if(msg=="!수요일 책목록") {
+			var fixedweek = '수';
+			var booklist = '국어 2-1\n= 기술가정 2\n= 미술 2\n= 수학 2\n= 영어 2\n= 체육 1/2';
+			replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+			'- 책 목록\n'+
+			'= '+booklist);
+		} else if(msg=="!목요일 책목록") {
+			var fixedweek = '목';
+			var booklist = '과학 2\n= 기술가정 2\n= 수학 2\n= 역사 1\n= 생활 중국어';
+			replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+			'- 책 목록\n'+
+			'= '+booklist);
+		} else if(msg=="!금요일 책목록") {
+			var fixedweek = '금';
+			var booklist = '과학 2\n= 국어 2-1\n= 도덕 2\n= 역사 1\n= 영어 2\n= 음악 1\n= 생활 중국어';
+			replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+			'- 책 목록\n'+
+			'= '+booklist);
 		}
 	}
 }
