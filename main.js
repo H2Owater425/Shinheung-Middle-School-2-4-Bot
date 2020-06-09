@@ -367,31 +367,30 @@ function response(room, msg, sender, isGroupChat, replier) {
 			if(classnum==0) {
 				var fixedclassnum = "0.5"
 				var week = 0;
-				var fixedclassnum = 1;
+				var newclassnum = 1;
 			} else if(classnum==99) {
 				var fixedclassnum = "4.5"
 				var week = 0;
-				var fixedclassnum = 2;
+				var newclassnum = 2;
 			} else if(classnum==97) {
 				var fixedclassnum = "6.5"
 				var week = 0;
-				var fixedclassnum = 3;
+				var newclassnum = 3;
 			} else if(classnum==98) {
 				var fixedclassnum = "7.5"
 				var week = 0;
-				var fixedclassnum = 3;
+				var newclassnum = 3;
 			} else {
 				var fixedclassnum = classnum;
 			}
-			if(classnum!=0 && classnum!=99 && classnum!=97 && classnum!=98) {
+			if(typeof newclassnum != "undefined" || newclassnum != null || newclassnum != "") {
 				var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classname").text();	
 				var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classlink").text();
-				var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
 			} else {
-				var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classname").text();	
-				var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classlink").text();
-				var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
+				var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week=0&classnum="+newclassnum).get().select("classname").text();	
+				var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week=0&classnum="+newclassnum).get().select("classlink").text();
 			}
+			var curweek = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
 			if(curweek==1) {
 				var fixedcurweek = '월';
 			} else if(curweek==2) {
