@@ -365,24 +365,20 @@ function response(room, msg, sender, isGroupChat, replier) {
 		} 
 		if(classnum==0) {
 			var fixedclassnum = "0.5"
-			var week = 0;
 			var newclassnum = 1;
 		} else if(classnum==99) {
 			var fixedclassnum = "4.5"
-			var week = 0;
 			var newclassnum = 2;
 		} else if(classnum==97) {
 			var fixedclassnum = "6.5"
-			var week = 0;
 			var newclassnum = 3;
 		} else if(classnum==98) {
 			var fixedclassnum = "7.5"
-			var week = 0;
 			var newclassnum = 3;
 		} else {
 			var fixedclassnum = classnum;
 		}
-		if(typeof newclassnum != "undefined" || newclassnum != null || newclassnum != "") {
+		if(typeof newclassnum == "undefined" || newclassnum == null || newclassnum == "") {
 			var classname = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classname").text();	
 			var classlink = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasslink.php?week="+week+"&classnum="+fixedclassnum).get().select("classlink").text();
 		} else {
