@@ -18,7 +18,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		var class6link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=1").get().select("class6link").text();
 		var class7 = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=1").get().select("class7").text();
 		var class7link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=1").get().select("class7link").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -61,7 +61,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		var class6link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=2").get().select("class6link").text();
 		var class7 = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=2").get().select("class7").text();
 		var class7link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=2").get().select("class7link").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -104,7 +104,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		var class6link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=3").get().select("class6link").text();
 		var class7 = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=3").get().select("class7").text();
 		var class7link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=3").get().select("class7link").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -147,7 +147,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		var class6link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=4").get().select("class6link").text();
 		var class7 = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=4").get().select("class7").text();
 		var class7link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=4").get().select("class7link").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -190,7 +190,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 		var class6link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=5").get().select("class6link").text();
 		var class7 = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=5").get().select("class7").text();
 		var class7link = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=5").get().select("class7link").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -219,13 +219,13 @@ function response(room, msg, sender, isGroupChat, replier) {
 		'= '+class7link);
 	} else if(msg=="!토요일 시간표"){
 		var week = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=6").get().select("week").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'( 이스터에그 ~토요일의 수업~ )\n'+
 		'- 축하합니다! 이스터에그를 찾으셨습니다!'+'\n'+
 		'= 토요일 시간표를 보려하다니 정말 시간이 남아 도시나보군요 (쉬는날인데 ㅎㅎㅋㅋ)');
 	} else if(msg=="!일요일 시간표"){
 		var week = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getclasses.php?week=7").get().select("week").text();
-		replier.reply('[ '+week+'요일 시간표 ]\n'+'\n'+
+		replier.reply('[ 시간표('+week+'요일) ]\n'+'\n'+
 		'( 이스터에그 ~다음날에 수업함~ )\n'+
 		'- 축하합니다! 이스터에그를 찾으셨습니다!'+'\n'+
 		'= 그거 아시나요? 다음날에 수업해요 ㅋㅋㅋㅋ');
@@ -694,8 +694,17 @@ function response(room, msg, sender, isGroupChat, replier) {
 				'- 허용되지 않은 단어입니다!');
 				var strnallow = true;
 			}
-			var week = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getweek.php").get().select("curweek").text();
-			if(week>5) {
+			if(week==1) {
+				var fixedweek = '월';
+			} else if(week==2) {
+				var fixedweek = '화';
+			} else if(week==3) {
+				var fixedweek = '수';
+			} else if(week==4) {
+				var fixedweek = '목';
+			} else if(week==5) {
+				var fixedweek = '금';
+			} else {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 오늘은 수업일이 아닙니다!');
 				var strnallow = true;
@@ -711,7 +720,7 @@ function response(room, msg, sender, isGroupChat, replier) {
 					} else if(classnum==99 && week==5) {
 						var classtime = '7.5교시';
 					}
-					replier.reply('[ 과목검색 ]\n'+'\n'+
+					replier.reply('[ 과목검색('+fixedweek+'요일) ]\n'+'\n'+
 						'( 과목 '+classname+'의 정보 )\n'+
 						'- 포함 교시\n'+
 						'= '+classtime);
