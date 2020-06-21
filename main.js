@@ -760,31 +760,31 @@ function response(room, msg, sender, isGroupChat, replier) {
 	} else if(msg=="!월요일 책목록") {
 		var fixedweek = '월';
 		var booklist = '국어 2-1\n= 미술 2\n= 역사 1\n= 영어 2\n= 음악 1\n= 생활 중국어';
-		replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+		replier.reply('[ 책목록('+fixedweek+'요일) ]\n'+'\n'+
 		'- 책 목록\n'+
 		'= '+booklist);
 	} else if(msg=="!화요일 책목록") {
 		var fixedweek = '화';
 		var booklist = '과학 2\n= 기술가정 2\n= 도덕 2\n= 수학 2\n= 체육 1/2';
-		replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+		replier.reply('[ 책목록('+fixedweek+'요일) ]\n'+'\n'+
 		'- 책 목록\n'+
 		'= '+booklist);
 	} else if(msg=="!수요일 책목록") {
 		var fixedweek = '수';
 		var booklist = '국어 2-1\n= 기술가정 2\n= 미술 2\n= 수학 2\n= 영어 2\n= 체육 1/2';
-		replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+		replier.reply('[ 책목록('+fixedweek+'요일) ]\n'+'\n'+
 		'- 책 목록\n'+
 		'= '+booklist);
 	} else if(msg=="!목요일 책목록") {
 		var fixedweek = '목';
 		var booklist = '과학 2\n= 기술가정 2\n= 수학 2\n= 역사 1\n= 생활 중국어';
-		replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+		replier.reply('[ 책목록('+fixedweek+'요일) ]\n'+'\n'+
 		'- 책 목록\n'+
 		'= '+booklist);
 	} else if(msg=="!금요일 책목록") {
 		var fixedweek = '금';
 		var booklist = '과학 2\n= 국어 2-1\n= 도덕 2\n= 역사 1\n= 영어 2\n= 음악 1\n= 생활 중국어';
-		replier.reply('[ 오늘 책('+fixedweek+'요일) ]\n'+'\n'+
+		replier.reply('[ 책목록('+fixedweek+'요일) ]\n'+'\n'+
 		'- 책 목록\n'+
 		'= '+booklist);
 	}
