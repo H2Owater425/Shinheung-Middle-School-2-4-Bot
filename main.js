@@ -199,5 +199,6 @@ function response(room, msg, sender, isGroupChat, replier) {
 		}
 	} catch(e) {
 		replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', e.message);
+		replier.reply('https://api.h2owr.xyz/getclasses.php?week='+weeknumber);
 	}
 }
