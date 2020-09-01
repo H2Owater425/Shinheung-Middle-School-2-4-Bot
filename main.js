@@ -72,13 +72,11 @@ function response(room, msg, sender, isGroupChat, replier) {
 			}
 			var weekname = getWeekName(weeknumber)
 			if(weekname===-1) {
-				replier.reply('[ 오류 ]'+'\n'+'\n'+
-				'- 요일을 얻지 못했습니다');
-				return -1
+				throw new Error('!시간표 명령어에서 요일을 얻지 못했습니다')
 			}
 			for(var i; i<=6; i++) {
-				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+weeknumber).get().select('class'+i).text();
-				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+weeknumber).get().select('class'+i+'link').text();
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+String(weeknumber)).get().select('class'+String(i)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+String(weeknumber)).get().select('class'+String(i)+'link').text();
 			}
 			if(typeof classname[6] === 'undefined' && typeof classlink[6] === 'undefined') {
 				classname[6] = '없음';
@@ -123,8 +121,8 @@ function response(room, msg, sender, isGroupChat, replier) {
 				return -1
 			}
 			for(var i; i<=6; i++) {
-				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+weeknumber).get().select('class'+i).text();
-				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+weeknumber).get().select('class'+i+'link').text();
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+String(weeknumber)).get().select('class'+String(i)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/getclasses.php?week='+String(weeknumber)).get().select('class'+String(i)+'link').text();
 			}
 			if(typeof classname[6] === 'undefined' && typeof classlink[6] === 'undefined') {
 				classname[6] = '없음';
@@ -199,6 +197,5 @@ function response(room, msg, sender, isGroupChat, replier) {
 		}
 	} catch(e) {
 		replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', e.message);
-		replier.reply('https://api.h2owr.xyz/getclasses.php?week='+weeknumber);
 	}
 }
