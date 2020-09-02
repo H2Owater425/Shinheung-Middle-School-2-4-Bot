@@ -1,5 +1,5 @@
 const scriptName = 'UnOffi_SHMBot_2-4';
-const botVersion = '2020.9.3f2';
+const botVersion = '2020.9.4f5';
 /**
  * (string) room
  * (string) sender
@@ -271,376 +271,386 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		return bookname;
 	}
 
-	if(!msg.startsWith('!')) {
-		// !로 시작하지 않을시
-		return 0;
-	}
-
-	msg = msg.trim();
-	msg = msg.split('!');
-	msg = msg[1];
-	msg = msg.split(' ');
-	// 예) !시간표 월요일 asdf
-	var command = msg[0] // 시간표
-	var arg0 = msg[1] // 월요일
-	var arg1 = msg[2] // asdf
-	var weekname = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
-	var studentname = ['김강민', '김동순', '김민기', '김시온', '김장순', '김재경', '김주원', '남궁한', '박주찬', '박준희', '박지근', '송종국', '신현우', '심철웅', '안건영', '엄민영', '원동현', '이기태', '이재준', '임재빈', '장도경', '전시우', '정종환', '조성우', '조연우', '조현성', '황재성'];
-	
-
-	if(command === '시간표' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !시간표
-		var classname = new Array(7);
-		var classlink = new Array(7);
-		var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
-		var weekname = weekname[weeknumber];
-		if(weeknumber>=5) {
-			replier.reply('[ 알림 ]'+'\n'+'\n'+
-			'= 금일은 수업일이 아닙니다');
+	try {
+		if(!msg.startsWith('!')) {
+			// !로 시작하지 않을시
 			return 0;
 		}
-		for(var i = 0; i<=6; i++) {
-			classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
-			classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
-			if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
-				classname[i] = '없음';
-				classlink[i] = '없음';
-			}
-		}
-		replier.reply('[ 오늘 시간표('+weekname+') ]'+'\n'+'\n'+
-		'- 조회/종례\n'+
-		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
-		'( 1교시 / 9:10~9:50 )'+'\n'+
-		'- '+classname[0]+'\n'+
-		'= '+classlink[0]+'\n'+'\n'+
-		'( 2교시 / 10:00~10:40 )'+'\n'+
-		'- '+classname[1]+'\n'+
-		'= '+classlink[1]+'\n'+'\n'+
-		'( 3교시 / 10:50~11:30 )'+'\n'+
-		'- '+classname[2]+'\n'+
-		'= '+classlink[2]+'\n'+'\n'+
-		'( 4교시 / 11:40~12:20 )'+'\n'+
-		'- '+classname[3]+'\n'+
-		'= '+classlink[3]+'\n'+'\n'+
-		'( 점심 / 12:20~13:20 )'+'\n'+
-		'- 점심'+'\n'+
-		'= 없음'+'\n'+'\n'+
-		'( 5교시 / 13:20~14:00 )'+'\n'+
-		'- '+classname[4]+'\n'+
-		'= '+classlink[4]+'\n'+'\n'+
-		'( 6교시 / 14:10~14:50 )'+'\n'+
-		'- '+classname[5]+'\n'+
-		'= '+classlink[5]+'\n'+'\n'+
-		'( 7교시 / 15:00~15:40 )'+'\n'+
-		'- '+classname[6]+'\n'+
-		'= '+classlink[6]+'\n'+'\n');
-		return 0;
 
-	} else if(command === '시간표' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
-		// !시간표 arg0
-		var classname = new Array(7);
-		var classlink = new Array(7);
-		var weeknumber = weekname.indexOf(arg0);
-		if(weeknumber===-1) {
-			replier.reply('[ 오류 ]'+'\n'+'\n'+
-			'= 허용되지 않은 전달인자입니다');
-			return -1;
-		}
-		var weekname = weekname[weeknumber];
-		for(var i = 0; i<=6; i++) {
-			classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
-			classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
-			if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
-				classname[i] = '없음';
-				classlink[i] = '없음';
-			}
-		}
-		replier.reply('[ 시간표 정보('+arg0+') ]'+'\n'+'\n'+
-		'- 조회/종례\n'+
-		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
-		'( 1교시 / 9:10~9:50 )'+'\n'+
-		'- '+classname[0]+'\n'+
-		'= '+classlink[0]+'\n'+'\n'+
-		'( 2교시 / 10:00~10:40 )'+'\n'+
-		'- '+classname[1]+'\n'+
-		'= '+classlink[1]+'\n'+'\n'+
-		'( 3교시 / 10:50~11:30 )'+'\n'+
-		'- '+classname[2]+'\n'+
-		'= '+classlink[2]+'\n'+'\n'+
-		'( 4교시 / 11:40~12:20 )'+'\n'+
-		'- '+classname[3]+'\n'+
-		'= '+classlink[3]+'\n'+'\n'+
-		'( 점심 / 12:20~13:20 )'+'\n'+
-		'- 점심'+'\n'+
-		'= 없음'+'\n'+'\n'+
-		'( 5교시 / 13:20~14:00 )'+'\n'+
-		'- '+classname[4]+'\n'+
-		'= '+classlink[4]+'\n'+'\n'+
-		'( 6교시 / 14:10~14:50 )'+'\n'+
-		'- '+classname[5]+'\n'+
-		'= '+classlink[5]+'\n'+'\n'+
-		'( 7교시 / 15:00~15:40 )'+'\n'+
-		'- '+classname[6]+'\n'+
-		'= '+classlink[6]+'\n'+'\n');
-		return 0;
+		msg = msg.trim();
+		msg = msg.split('!');
+		msg = msg[1];
+		msg = msg.split(' ');
+		// 예) !시간표 월요일 asdf
+		var command = msg[0] // 시간표
+		var arg0 = msg[1] // 월요일
+		var arg1 = msg[2] // asdf
+		var weekname = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
+		var studentname = ['김강민', '김동순', '김민기', '김시온', '김장순', '김재경', '김주원', '남궁한', '박주찬', '박준희', '박지근', '송종국', '신현우', '심철웅', '안건영', '엄민영', '원동현', '이기태', '이재준', '임재빈', '장도경', '전시우', '정종환', '조성우', '조연우', '조현성', '황재성'];
+		
 
-	} else if(command === '과목' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !과목
-		var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
-		var weekname = weekname[weeknumber];
-		let timenow = new Date();
-		var classperiod = getCurrentPeriod(timenow.getHours()*60+timenow.getMinutes(), weeknumber);
-		if(weeknumber>=5) {
-			replier.reply('[ 알림 ]'+'\n'+'\n'+
-			'= 금일은 수업일이 아닙니다');
-			return 0;
-		}
-		if(classperiod[0] === -1 || classperiod[0] === 0.5 || classperiod[0] === 4.5 || classperiod[0] === 6.5 || classperiod[0] === 7.5) {
-			if(classperiod[0] === -1) {
+		if(command === '시간표' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !시간표
+			var classname = new Array(7);
+			var classlink = new Array(7);
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weekname = weekname[weeknumber];
+			if(weeknumber>=5) {
 				replier.reply('[ 알림 ]'+'\n'+'\n'+
-				'= 지금은 수업시간이 아닙니다');
+				'= 금일은 수업일이 아닙니다');
 				return 0;
-			} else if(classperiod[0] === 0.5) {
-				classperiod[0] = 1;
-			} else {
-				classperiod[0] -= 0.5;
 			}
-			var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classname').text();
-			var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classlink').text();
-		} else {
-			var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classname').text();
-			var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classlink').text();
-		}
-		if(classperiod[3]) {
-			classperiod[3] = '';
-		} else {
-			classperiod[3] = '(예비)';
-		}
-		replier.reply('[ 현재 과목'+classperiod[3]+' ]'+'\n'+'\n'+
-		'( '+classperiod[1]+' / '+weekname+' / '+classperiod[2]+' )'+'\n'+
-		'- '+classname+'\n'+
-		'= '+classlink);
-		return 0;
+			for(var i = 0; i<=6; i++) {
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
+				if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
+					classname[i] = '없음';
+					classlink[i] = '없음';
+				}
+			}
+			replier.reply('[ 오늘 시간표('+weekname+') ]'+'\n'+'\n'+
+			'- 조회/종례\n'+
+			'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
+			'( 1교시 / 9:10~9:50 )'+'\n'+
+			'- '+classname[0]+'\n'+
+			'= '+classlink[0]+'\n'+'\n'+
+			'( 2교시 / 10:00~10:40 )'+'\n'+
+			'- '+classname[1]+'\n'+
+			'= '+classlink[1]+'\n'+'\n'+
+			'( 3교시 / 10:50~11:30 )'+'\n'+
+			'- '+classname[2]+'\n'+
+			'= '+classlink[2]+'\n'+'\n'+
+			'( 4교시 / 11:40~12:20 )'+'\n'+
+			'- '+classname[3]+'\n'+
+			'= '+classlink[3]+'\n'+'\n'+
+			'( 점심 / 12:20~13:20 )'+'\n'+
+			'- 점심'+'\n'+
+			'= 없음'+'\n'+'\n'+
+			'( 5교시 / 13:20~14:00 )'+'\n'+
+			'- '+classname[4]+'\n'+
+			'= '+classlink[4]+'\n'+'\n'+
+			'( 6교시 / 14:10~14:50 )'+'\n'+
+			'- '+classname[5]+'\n'+
+			'= '+classlink[5]+'\n'+'\n'+
+			'( 7교시 / 15:00~15:40 )'+'\n'+
+			'- '+classname[6]+'\n'+
+			'= '+classlink[6]+'\n'+'\n');
+			return 0;
 
-	} else if(command === '과목' && typeof arg0 !== 'undefined') {
-		// !과목 arg0 arg1
-		if(arg0 === '교시검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
-			// !과목 교시검색 arg1
-			var classinformation = getClassInformation(arg1);
-			var classname = classinformation[1];
-			if(classinformation[0] === -1) {
+		} else if(command === '시간표' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
+			// !시간표 arg0
+			var classname = new Array(7);
+			var classlink = new Array(7);
+			var weeknumber = weekname.indexOf(arg0);
+			if(weeknumber===-1) {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'= 허용되지 않은 전달인자입니다');
-				return -1;
-			} else {
-				replier.reply('[ 검색 결과 ]'+'\n'+'\n'+
-				'( 과목 '+classname+'의 정보 )'+'\n'+
-				'- 포함 교시 : '+classinformation[3]);
 				return 0;
 			}
-		} else if(arg0 === '정보검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
-			// !과목 정보검색 arg1
-			var classinformation = getClassInformation(arg1);
-			var classname = classinformation[1];
-			if(classinformation[0] === -1) {
-				replier.reply('[ 오류 ]'+'\n'+'\n'+
-				'- 허용되지 않은 전달인자입니다');
-				return -1;
-			} else {
-				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/specific.php?classnumber='+classinformation[0]).get().select('classlink').text();
-				replier.reply('[ 과목 정보 ]'+'\n'+'\n'+
-				'( 과목 '+classname+'의 정보 )'+'\n'+
-				'- 선생님 : '+classinformation[2]+'쌤'+'\n'+
-				'- 링크 : '+classlink+'\n'+
-				'- 교시 : '+classinformation[3]);
+			var weekname = weekname[weeknumber];
+			for(var i = 0; i<=6; i++) {
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
+				if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
+					classname[i] = '없음';
+					classlink[i] = '없음';
+				}
+			}
+			replier.reply('[ 시간표 정보('+arg0+') ]'+'\n'+'\n'+
+			'- 조회/종례\n'+
+			'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
+			'( 1교시 / 9:10~9:50 )'+'\n'+
+			'- '+classname[0]+'\n'+
+			'= '+classlink[0]+'\n'+'\n'+
+			'( 2교시 / 10:00~10:40 )'+'\n'+
+			'- '+classname[1]+'\n'+
+			'= '+classlink[1]+'\n'+'\n'+
+			'( 3교시 / 10:50~11:30 )'+'\n'+
+			'- '+classname[2]+'\n'+
+			'= '+classlink[2]+'\n'+'\n'+
+			'( 4교시 / 11:40~12:20 )'+'\n'+
+			'- '+classname[3]+'\n'+
+			'= '+classlink[3]+'\n'+'\n'+
+			'( 점심 / 12:20~13:20 )'+'\n'+
+			'- 점심'+'\n'+
+			'= 없음'+'\n'+'\n'+
+			'( 5교시 / 13:20~14:00 )'+'\n'+
+			'- '+classname[4]+'\n'+
+			'= '+classlink[4]+'\n'+'\n'+
+			'( 6교시 / 14:10~14:50 )'+'\n'+
+			'- '+classname[5]+'\n'+
+			'= '+classlink[5]+'\n'+'\n'+
+			'( 7교시 / 15:00~15:40 )'+'\n'+
+			'- '+classname[6]+'\n'+
+			'= '+classlink[6]+'\n'+'\n');
+			return 0;
+
+		} else if(command === '과목' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !과목
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weekname = weekname[weeknumber];
+			let timenow = new Date();
+			var classperiod = getCurrentPeriod(timenow.getHours()*60+timenow.getMinutes(), weeknumber);
+			if(weeknumber>=5) {
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 금일은 수업일이 아닙니다');
 				return 0;
 			}
-		} else {
-			replier.reply('[ 오류 ]'+'\n'+'\n'+
-			'- 허용되지 않은 전달인자입니다');
-			return -1;
-		}
+			if(classperiod[0] === -1 || classperiod[0] === 0.5 || classperiod[0] === 4.5 || classperiod[0] === 6.5 || classperiod[0] === 7.5) {
+				if(classperiod[0] === -1) {
+					replier.reply('[ 알림 ]'+'\n'+'\n'+
+					'= 지금은 수업시간이 아닙니다');
+					return 0;
+				} else if(classperiod[0] === 0.5) {
+					classperiod[0] = 1;
+				} else {
+					classperiod[0] -= 0.5;
+				}
+				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classname').text();
+				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classlink').text();
+			} else {
+				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classname').text();
+				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classlink').text();
+			}
+			if(classperiod[3]) {
+				classperiod[3] = '';
+			} else {
+				classperiod[3] = '(예비)';
+			}
+			replier.reply('[ 현재 과목'+classperiod[3]+' ]'+'\n'+'\n'+
+			'( '+classperiod[1]+' / '+weekname+' / '+classperiod[2]+' )'+'\n'+
+			'- '+classname+'\n'+
+			'= '+classlink);
+			return 0;
 
-	} else if(command === '책목록' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !책목록
-		var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
-		var weekname = weekname[weeknumber];
-		var bookname = getBookName(weeknumber);
-		if(weeknumber>=5) {
-			replier.reply('[ 알림 ]'+'\n'+'\n'+
-			'- 금일은 수업일이 아닙니다');
-			return 0;
-		}
-		replier.reply('[ 책 정보('+weekname+') ]'+'\n'+'\n'+
-		'- 책 목록 : '+bookname);
-		return 0;
-		
-	} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
-		// !책목록 arg0
-		var weeknumber = weekname.indexOf(arg0);
-		var bookname = getBookName(weeknumber);
-		if(weeknumber===-1) {
-			replier.reply('[ 오류 ]'+'\n'+'\n'+
-			'- 허용되지 않은 전달인자입니다');
-			return -1;
-		}
-		if(weeknumber>=5) {
-			replier.reply('[ 알림 ]'+'\n'+'\n'+
-			'- 당일은 수업일이 아닙니다');
-			return 0;
-		}
-		replier.reply('[ 책 정보('+arg0+') ]'+'\n'+'\n'+
-		'- 책 목록 : '+bookname);
-		return 0;
-	
-	} else if(command === '학생정보' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
-		// !학생정보 arg0
-		var inttype = /^[0-9]/; 
-		var hangultype = /^[가-힣]/;
-		if(inttype.test(arg0)) {
-			if(1 <= arg0 && arg0 <= 27 || 2401 <= arg0 && arg0 <= 2427) {
-				var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentnumber').text();
-				var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentname').text();
-				var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentclub').text();
-				if(typeof studentnumber === 'undefined') {
+		} else if(command === '과목' && typeof arg0 !== 'undefined') {
+			// !과목 arg0 arg1
+			if(arg0 === '교시검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
+				// !과목 교시검색 arg1
+				var classinformation = getClassInformation(arg1);
+				var classname = classinformation[1];
+				if(classinformation[0] === -1) {
 					replier.reply('[ 오류 ]'+'\n'+'\n'+
-					'- 검색 결과가 없습니다');
-					return -1;
+					'= 허용되지 않은 전달인자입니다');
+					return 0;
+				} else {
+					replier.reply('[ 교시 정보 ]'+'\n'+'\n'+
+					'( 과목 '+classname+'의 정보 )'+'\n'+
+					'- 포함 교시 : '+classinformation[3]);
+					return 0;
+				}
+			} else if(arg0 === '정보검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
+				// !과목 정보검색 arg1
+				var classinformation = getClassInformation(arg1);
+				var classname = classinformation[1];
+				if(classinformation[0] === -1) {
+					replier.reply('[ 알림 ]'+'\n'+'\n'+
+					'= 허용되지 않은 전달인자입니다');
+					return 0;
+				} else {
+					var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/specific.php?classnumber='+classinformation[0]).get().select('classlink').text();
+					replier.reply('[ 과목 정보 ]'+'\n'+'\n'+
+					'( 과목 '+classname+'의 정보 )'+'\n'+
+					'- 선생님 : '+classinformation[2]+'쌤'+'\n'+
+					'- 링크 : '+classlink+'\n'+
+					'- 교시 : '+classinformation[3]);
+					return 0;
 				}
 			} else {
-				replier.reply('[ 오류 ]'+'\n'+'\n'+
-				'- 허용되지 않은 전달인자입니다');
-				return -1;
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 허용되지 않은 전달인자입니다');
+				return 0;
 			}
-		} else if(hangultype.test(arg0)) {
-			if(studentname.indexOf(arg0) !== -1) {
-				var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentnumber').text();
-				var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentname').text();
-				var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentclub').text();
-				if(typeof studentnumber === 'undefined') {
-					replier.reply('[ 오류 ]'+'\n'+'\n'+
-					'- 검색 결과가 없습니다');
-					return -1;
+
+		} else if(command === '책목록' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !책목록
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weekname = weekname[weeknumber];
+			var bookname = getBookName(weeknumber);
+			if(weeknumber>=5) {
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 금일은 수업일이 아닙니다');
+				return 0;
+			}
+			replier.reply('[ 책 정보('+weekname+') ]'+'\n'+'\n'+
+			'- 책 목록 : '+bookname);
+			return 0;
+			
+		} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
+			// !책목록 arg0
+			var weeknumber = weekname.indexOf(arg0);
+			var bookname = getBookName(weeknumber);
+			if(weeknumber===-1) {
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 허용되지 않은 전달인자입니다');
+				return 0;
+			}
+			if(weeknumber>=5) {
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 당일은 수업일이 아닙니다');
+				return 0;
+			}
+			replier.reply('[ 책 정보('+arg0+') ]'+'\n'+'\n'+
+			'- 책 목록 : '+bookname);
+			return 0;
+		
+		} else if(command === '학생정보' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
+			// !학생정보 arg0
+			var inttype = /^[0-9]/; 
+			var hangultype = /^[가-힣]/;
+			if(inttype.test(arg0)) {
+				if(1 <= arg0 && arg0 <= 27 || 2401 <= arg0 && arg0 <= 2427) {
+					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentnumber').text();
+					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentname').text();
+					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentclub').text();
+					if(typeof studentnumber === 'undefined') {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'= 검색 결과가 없습니다');
+						throw '!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨';
+					}
+				} else {
+					replier.reply('[ 알림 ]'+'\n'+'\n'+
+					'= 허용되지 않은 전달인자입니다');
+					return 0;
+				}
+			} else if(hangultype.test(arg0)) {
+				if(studentname.indexOf(arg0) !== -1) {
+					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentnumber').text();
+					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentname').text();
+					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentclub').text();
+					if(typeof studentnumber === 'undefined') {
+						replier.reply('[ 오류 ]'+'\n'+'\n'+
+						'= 검색 결과가 없습니다');
+						throw '!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨';
+					}
+				} else {
+					replier.reply('[ 알림 ]'+'\n'+'\n'+
+					'= 허용되지 않은 전달인자입니다');
+					return 0;
 				}
 			} else {
-				replier.reply('[ 오류 ]'+'\n'+'\n'+
-				'- 허용되지 않은 전달인자입니다');
-				return -1;
+				replier.reply('[ 알림 ]'+'\n'+'\n'+
+				'= 허용되지 않은 전달인자입니다');
+				return 0;
 			}
-		} else {
-			replier.reply('[ 오류 ]'+'\n'+'\n'+
-			'- 허용되지 않은 전달인자입니다');
-			return -1;
+			replier.reply('[ 학생정보 ]'+'\n'+'\n'+
+			'( '+arg0+'의 검색 결과 )'+'\n'+
+			'- 이름 : '+studentname+'\n'+
+			'- 학번 : '+studentnumber+'\n'+
+			'- 동아리 : '+studentclub);
+			return 0;
+			
+		} else if(command === '봇정보' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !봇정보
+			replier.reply('[ 봇정보 ]'+'\n'+'\n'+
+			'- 이름 : 비공식_신흥봇_2-4'+'\n'+
+			'- 버전 : '+botVersion+'\n'+
+			'- 기기 : Android '+Device.getAndroidVersionName()+'\n'+
+			'- 깃헙 : https://go.h2owr.xyz/kakaobgh'+'\n'+
+			'- 라이센스 : https://go.h2owr.xyz/kakaoblc'+'\n'+
+			'- Made by KKM');
+			return 0;
+
+		} else if(command === '코로나' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !코로나
+			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("date").text();
+			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cases").text();
+			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("casesPREV").text();
+			var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cured").text();
+			var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("curedPREV").text();
+			var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaran").text();
+			var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaranPREV").text();
+			var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deaths").text();
+			var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deathsPREV").text();
+			var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("dperc").text();
+			var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cperc").text();
+			replier.reply('[ 코로나 현황('+date+') ]'+'\n'+'\n'+
+			'( 확진자 )'+'\n'+
+			'= '+cases+' <오늘>'+'\n'+
+			'= '+casesPREV+' <전날>'+'\n'+'\n'+
+			'( 완치자 )'+'\n'+
+			'= '+cured+' <오늘>'+'\n'+
+			'= '+curedPREV+' <전날>'+'\n'+'\n'+
+			'( 격리자 )'+'\n'+
+			'= '+quaran+' <오늘>'+'\n'+
+			'= '+quaranPREV+' <전날>'+'\n'+'\n'+
+			'( 사망자 )'+'\n'+
+			'= '+deaths+' <오늘>'+'\n'+
+			'= '+deathsPREV+' <전날>'+'\n'+'\n'+
+			'( 치사울/완치율 )'+'\n'+
+			'= '+dperc+'%'+'\n'+
+			'= '+cperc+'%');
+			return 0;
+
+		} else if(command === '시간' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !시간
+			let timenow = new Date();
+			replier.reply('[ 현재 시각 ]'+'\n'+'\n'+
+			'- '+timenow.getHours()+'시 '+timenow.getMinutes()+'분');
+			return 0;
+			
+		} else if(command === '!호출' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !호출
+			replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 호출 ]'+'\n'+'\n'+
+			'= '+room+'에서 '+sender+'님에게 호출되었습니다');
+			return 0;
+			
+		} else if(command === '도움말' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+			// !도움말
+			replier.reply('[ 도움말 ]'+'\n'+'\n'+
+			'- !도움말'+'\n'+
+			'= 지금 보고있는 도움말을 출력합니다'+'\n'+'\n'+
+
+			'- !시간표'+'\n'+
+			'= 현재 요일에 따라서 시간표를 출력합니다'+'\n'+'\n'+
+
+			'- !시간표 <월~금>요일'+'\n'+
+			'= 요일별 시간표를 출력합니다'+'\n'+'\n'+
+
+			'- !과목'+'\n'+
+			'= 현재 수업중이거나 몇분 후 시작할 과목에 대한 정보를 출력합니다'+'\n'+'\n'+
+
+			'- !과목 교시검색 <국어~종례>'+'\n'+
+			'= 과목별 교시 정보를 출력합니다'+'\n'+'\n'+
+
+			'- !과목 정보검색 <국어~종례>'+'\n'+
+			'= 과목별  정보를 출력합니다'+'\n'+'\n'+
+
+			'- !학생정보 <(240)1~(24)27/김강민~황재성>'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 학생정보를 출력합니다.'+'\n'+'\n'+
+
+			'- !책목록'+'\n'+
+			'= 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
+
+			'- !책목록 <월~금>요일'+'\n'+
+			'= 꺾쇠 안의 조건에 따라, 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
+
+			'- !코로나'+'\n'+
+			'= 당일 1시 기준 코로나 관련 정보를 출력합니다'+'\n'+'\n'+
+
+			'- !호출'+'\n'+
+			'= 개발자를 호출합니다'+'\n'+'\n'+
+
+			'- !시간'+'\n'+
+			'= 현제 시간을 출력합니다'+'\n'+'\n'+
+
+			'- !봇정보'+'\n'+
+			'= 봇의 정보를 출력합니다');
+			return 0;
+
 		}
-		replier.reply('[ 학생정보 ]'+'\n'+'\n'+
-		'( '+arg0+'의 검색 결과 )'+'\n'+
-		'- 이름 : '+studentname+'\n'+
-		'- 학번 : '+studentnumber+'\n'+
-		'- 동아리 : '+studentclub);
-		return 0;
-		
-	} else if(command === '봇정보' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !봇정보
-		replier.reply('[ 봇정보 ]'+'\n'+'\n'+
-		'- 이름 : 비공식_신흥봇_2-4'+'\n'+
-		'- 버전 : '+botVersion+'\n'+
-		'- 깃헙 : https://go.h2owr.xyz/kakaobgh'+'\n'+
-		'- 라이센스 : https://go.h2owr.xyz/kakaoblc'+'\n'+
-		'= Made by KKM');
-		return 0;
-
-	} else if(command === '코로나' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !코로나
-		var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("date").text();
-		var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cases").text();
-		var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("casesPREV").text();
-		var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cured").text();
-		var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("curedPREV").text();
-		var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaran").text();
-		var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaranPREV").text();
-		var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deaths").text();
-		var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deathsPREV").text();
-		var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("dperc").text();
-		var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cperc").text();
-		replier.reply('[ 코로나 현황('+date+') ]'+'\n'+'\n'+
-		'( 확진자 )'+'\n'+
-		'= '+cases+' <오늘>'+'\n'+
-		'= '+casesPREV+' <전날>'+'\n'+'\n'+
-		'( 완치자 )'+'\n'+
-		'= '+cured+' <오늘>'+'\n'+
-		'= '+curedPREV+' <전날>'+'\n'+'\n'+
-		'( 격리자 )'+'\n'+
-		'= '+quaran+' <오늘>'+'\n'+
-		'= '+quaranPREV+' <전날>'+'\n'+'\n'+
-		'( 사망자 )'+'\n'+
-		'= '+deaths+' <오늘>'+'\n'+
-		'= '+deathsPREV+' <전날>'+'\n'+'\n'+
-		'( 치사울/완치율 )'+'\n'+
-		'= '+dperc+'%'+'\n'+
-		'= '+cperc+'%');
-		return 0;
-
-	} else if(command === '시간' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !시간
-		let timenow = new Date();
-		replier.reply('[ 현재 시각 ]'+'\n'+'\n'+
-		'- '+timenow.getHours()+'시 '+timenow.getMinutes()+'분');
-		return 0;
-		
-	} else if(command === '도움말' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
-		// !도움말
-		replier.reply('[ 도움말 ]'+'\n'+'\n'+
-		'- !도움말'+'\n'+
-		'= 지금 보고있는 도움말을 출력합니다'+'\n'+'\n'+
-
-		'- !시간표'+'\n'+
-		'= 현재 요일에 따라서 시간표를 출력합니다'+'\n'+'\n'+
-
-		'- !시간표 <월~금>요일'+'\n'+
-		'= 요일별 시간표를 출력합니다'+'\n'+'\n'+
-
-		'- !과목'+'\n'+
-		'= 현재 수업중이거나 몇분 후 시작할 과목에 대한 정보를 출력합니다'+'\n'+'\n'+
-
-		'- !과목 교시검색 <국어~종례>'+'\n'+
-		'= 과목별 교시 정보를 출력합니다'+'\n'+'\n'+
-
-		'- !과목 정보검색 <국어~종례>'+'\n'+
-		'= 과목별  정보를 출력합니다'+'\n'+'\n'+
-
-		'- !학생정보 <(240)1~(24)27/김강민~황재성>'+'\n'+
-		'= 꺾쇠 안의 조건에 따라, 학생정보를 출력합니다.'+'\n'+'\n'+
-
-		'- !책목록'+'\n'+
-		'= 해당 요일에 준비해야 하는 책의 목록을 출력합니다.'+'\n'+'\n'+
-
-		'- !책목록 <월~금>요일'+'\n'+
-		'= 꺾쇠 안의 조건에 따라, 해당 요일에 준비해야 하는 책의 목록을 출력합니다.'+'\n'+'\n'+
-
-		'- !코로나'+'\n'+
-		'= 당일 1시 기준 코로나 관련 정보를 출력합니다.'+'\n'+'\n'+
-
-		'- !시간'+'\n'+
-		'= 현제 시간을 출력합니다.'+'\n'+'\n'+
-
-		'- !봇정보'+'\n'+
-		'= 봇의 정보를 출력합니다.');
-		return 0;
-	} else {
-		replier.reply('[ 오류 ]'+'\n'+'\n'+
-		'- 허용되지 않은 명령어입니다');
-		return -1;
+	} catch(e) {
+		Log.error(e+' @ line:'+e.lineNumber);
+		Api.makeNoti(e);
+		replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 오류 ]'+'\n'+'\n'+
+		'= 봇에서 오류가 발견되었습니다,'+'\n'+
+		'= 서버 상태 또는 봇 에러 로그를 확인해주세요'+'\n'+'\n'+
+		'- '+e+' @ line:'+e.lineNumber);
 	}
-
 }
 
 //아래 4개의 메소드는 액티비티 화면을 수정할때 사용됩니다.
-function onCreate(savedInstanceState, activity) {
-  var textView = new android.widget.TextView(activity);
-  textView.setText('Hello, World!');
-  textView.setTextColor(android.graphics.Color.DKGRAY);
-  activity.setContentView(textView);
-}
+function onCreate(savedInstanceState, activity) {}
 
 function onStart(activity) {}
 
