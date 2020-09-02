@@ -16,95 +16,95 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			// 조회 10분전
 			classperiod = [0.5, '조회', '9:00~9:10', false];
 
-		} else if	(540 <= minutes && minutes < 545) {
+		} else if(540 <= minutes && minutes < 545) {
 			// 조회 수업중
 			classperiod = [0.5, '조회', '9:00~9:10', true];
 
-		} else if	(545 <= minutes && minutes < 550) {
+		} else if(545 <= minutes && minutes < 550) {
 			// 1교시 5분전
 			classperiod = [1, '1교시', '9:10~9:50', false];
 
-		} else if	(550 <= minutes && minutes < 590) {
+		} else if(550 <= minutes && minutes < 590) {
 			// 1교시 수업중
 			classperiod = [1, '1교시', '9:10~9:50', true];
 
-		} else if	(590 <= minutes && minutes < 600) {
+		} else if(590 <= minutes && minutes < 600) {
 			// 2교시 10분전
 			classperiod = [2, '2교시', '10:00~10:40', false];
 
-		} else if	(600 <= minutes && minutes < 640) {
+		} else if(600 <= minutes && minutes < 640) {
 			// 2교시 수업중
 			classperiod = [2, '2교시', '10:00~10:40', true];
 
-		} else if	(640 <= minutes && minutes < 650) {
+		} else if(640 <= minutes && minutes < 650) {
 			// 3교시 10분전
 			classperiod = [3, '3교시', '10:50~11:30', false];
 
-		} else if	(650 <= minutes && minutes < 690) {
+		} else if(650 <= minutes && minutes < 690) {
 			// 3교시 수업중
 			classperiod = [3, '3교시', '10:50~11:30', true];
 
-		} else if	(690 <= minutes && minutes < 700) {
+		} else if(690 <= minutes && minutes < 700) {
 			// 4교시 10분전
 			classperiod = [4, '4교시', '11:40~12:20', false];
 
-		} else if	(700 <= minutes && minutes < 735) {
+		} else if(700 <= minutes && minutes < 735) {
 			// 4교시 수업중
 			classperiod = [4, '4교시', '11:40~12:20', true];
 
-		} else if	(735 <= minutes && minutes < 740) {
+		} else if(735 <= minutes && minutes < 740) {
 			// 점심 5분전
 			classperiod = [4.5, '점심', '12:20~13:20', false];
 
-		} else if	(740 <= minutes && minutes < 795) {
+		} else if(740 <= minutes && minutes < 795) {
 			// 점심 수업중
 			classperiod = [4.5, '점심', '12:20~13:20', true];
 
-		} else if	(795 <= minutes && minutes < 800) {
+		} else if(795 <= minutes && minutes < 800) {
 			// 5교시 5분전
 			classperiod = [5, '5교시', '13:20~14:00', false];
 
-		} else if	(800 <= minutes && minutes < 840) {
+		} else if(800 <= minutes && minutes < 840) {
 			// 5교시 수업중
 			classperiod = [5, '5교시', '13:20~14:00', true];
 
-		} else if	(840 <= minutes && minutes < 850 && weeknumber !== 4) {
+		} else if(840 <= minutes && minutes < 850 && weeknumber !== 4) {
 			// 6교시 10분전
 			classperiod = [6, '6교시', '14:10~14:50', false];
 
-		} else if	(850 <= minutes && minutes < 885 && weeknumber !== 4) {
+		} else if(850 <= minutes && minutes < 885 && weeknumber !== 4) {
 			// 6교시 수업중
 			classperiod = [6, '6교시', '14:10~14:50', true];
 
-		} else if	(885 <= minutes && minutes < 890 && weeknumber !== 4) {
+		} else if(885 <= minutes && minutes < 890 && weeknumber !== 4) {
 			// 종례 5분전
 			classperiod = [6.5, '종례', '14:50~15:10', false];
 
-		} else if	(890 <= minutes && minutes < 910 && weeknumber !== 4) {
+		} else if(890 <= minutes && minutes < 910 && weeknumber !== 4) {
 			// 종례 수업중
 			classperiod = [6.5, '종례', '14:50~15:10', true];
 
-		} else if	(840 <= minutes && minutes < 850 && weeknumber == 4) {
+		} else if(840 <= minutes && minutes < 850 && weeknumber == 4) {
 			// 금요일 6교시 10분전
 			classperiod = [6, '6교시', '14:10~14:50', false];
 
-		} else if	(850 <= minutes && minutes < 890 && weeknumber == 4) {
+		} else if(850 <= minutes && minutes < 890 && weeknumber == 4) {
 			// 금요일 6교시 수업중
 			classperiod = [6, '6교시', '14:10~14:50', true];
 
-		} else if	(890 <= minutes && minutes < 900 && weeknumber === 4) {
+		} else if(890 <= minutes && minutes < 900 && weeknumber === 4) {
 			// 금요일 7교시 10분전
 			classperiod = [7, '7교시', '15:00~15:40', false];
 
-		} else if	(900 <= minutes && minutes < 935 && weeknumber === 4) {
+		} else if(900 <= minutes && minutes < 935 && weeknumber === 4) {
 			// 금요일 7교시 수업중
 			classperiod = [7, '7교시', '15:00~15:40', true];
 
-		} else if	(935 <= minutes && minutes < 940 && weeknumber === 4) {
+		} else if(935 <= minutes && minutes < 940 && weeknumber === 4) {
 			// 금요일 종례 5분전
 			classperiod = [7.5, '종례', '15:40~16:00', false];
 
-		} else if	(940 <= minutes && minutes < 960 && weeknumber === 4) {
+		} else if(940 <= minutes && minutes < 960 && weeknumber === 4) {
 			// 금요일 종례 수업중
 			classperiod = [7.5, '종례', '15:40~16:00', true];
 
@@ -118,83 +118,83 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 	}
 	function getClassInformation(classname) {
 		var classinformation = new Array(4);
-		if(classname=='과학') {
+		if(classname === '과학') {
 			// 과학
 			classinformation = [1, '과학', '김상희', '수요일 4교시, 목요일 5교시, 금요일 5교시'];
 
-		} else if(classname=='국어') {
+		} else if(classname === '국어') {
 			// 국어
 			classinformation = [2, '국어', '김경삼', '월요일 6교시, 목요일 2교시, 금요알 2교시'];
 
-		} else if(classname=='기술가정') {
+		} else if(classname === '기술가정') {
 			// 기가
 			classinformation = [3, '기술가정', '안형웅', '화요일 2교시, 수요일 3교시, 목요일 6교시'];
 
-		} else if(classname=='기가') {
+		} else if(classname === '기가') {
 			// 기가
 			classinformation = [3, '기술가정', '안형웅', '화요일 2교시, 수요일 3교시, 목요일 6교시'];
 
-		} else if(classname=='도덕') {
+		} else if(classname === '도덕') {
 			// 도덕
 			classinformation = [4, '도덕', '김새미', '월요일 2교시, 수요일 5교시'];
 
-		} else if(classname=='미술') {
+		} else if(classname === '미술') {
 			// 미술
 			classinformation = [5, '미술', '김예린', '수요일 1교시, 금요일 7교시'];
 
-		} else if(classname=='수학') {
+		} else if(classname === '수학') {
 			// 수학
 			classinformation = [6, '수학', '안성호', '월요일 5교시, 화요일 6교시, 금요알 3교시'];
 
-		} else if(classname=='역사A') {
+		} else if(classname === '역사A') {
 			// 역사A
 			classinformation = [7, '역사A', '박경석', '월요일 3교시'];
 
-		} else if(classname=='역사B') {
+		} else if(classname === '역사B') {
 			// 역사B
 			classinformation = [8, '역사B', '이승은', '월요일 4교시, 목요일 3교시'];
 
-		} else if(classname=='영어') {
+		} else if(classname === '영어') {
 			// 영어
 			classinformation = [9, '영어', '이혜진', '화요일 5교시, 목요일 4교시, 금요일 1교시'];
 
-		} else if(classname=='음악') {
+		} else if(classname === '음악') {
 			// 음악
 			classinformation = [10, '음악', '이윤정', '수요알 6교시, 금요일 6교시'];
 
-		} else if(classname=='중국어') {
+		} else if(classname === '중국어') {
 			// 중국어
 			classinformation = [11, '중국어', '최윤정', '월요일 1교시, 화요일 2교시, 금요일 4교시'];
 
-		} else if(classname=='창체진로') {
+		} else if(classname === '창체진로') {
 			// 진로
 			classinformation = [12, '창체진로', '김경삼', '수요일 2교시'];
 
-		} else if(classname=='진로') {
+		} else if(classname === '진로') {
 			// 진로
 			classinformation = [12, '창체진로', '김경삼', '수요일 2교시'];
 
-		} else if(classname=='체육') {
+		} else if(classname === '체육') {
 			// 체육
 			classinformation = [13, '체육', '이경남', '화요일 4교시, 목요일 1교시'];
 
-		} else if(classname=='스포츠클럽') {
+		} else if(classname === '스포츠클럽') {
 			// 스클
 			classinformation = [14, '스포츠클럽', '이우혁', '화요일 3교시'];
 
-		} else if(classname=='스클') {
+		} else if(classname === '스클') {
 			// 스클
 			classinformation = [14, '스포츠클럽', '이우혁', '화요일 3교시'];
 
-		} else if(classname=='조회') {
+		} else if(classname === '조회') {
 			// 조회
 			classinformation = [100, '조회', '최윤정', '매일 1교시 전'];
 
-		} else if(classname=='종례') {
+		} else if(classname === '종례') {
 			// 종례
 			classinformation = [102, '종례', '최윤정', '월~목요일 6교시 후, 금요일 7교시 후'];
 
-		} else if(classname=='동아리') {
+		} else if(classname === '동아리') {
 			// 종례
 			classinformation = [103, '동아리', '각 반 동아리', '미정'];
 
@@ -206,61 +206,68 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		return classinformation;
 	}
-	function getBookNames(weeknumber) {
+	function getBookName(weeknumber) {
 		var classname = new Array(7);
+		var new_classname = new Array();
+		var bookname;
 		for(var i = 0; i<=6; i++) {
 			classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
-			if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
-				classname.remove(i);
+			if(classname[i] === '없음') {
+				delete classname[i];
 			}
 		}
 		for(var i in classname) {
-			if(i=='과학') {
+			if(classname[i] === '과학') {
 				// 과학
-				classname[classname.indexOf(i)] = '과학 2';
+				new_classname.push('과학 2');
 
-			} else if(i=='국어') {
+			} else if(classname[i] === '국어') {
 				// 국어
-				classname[classname.indexOf(i)] = '국어 2-2';
+				new_classname.push('국어 2-2');
 	
-			} else if(i=='기술가정') {
+			} else if(classname[i] === '기술가정') {
 				// 기가
-				classname[classname.indexOf(i)] = '기술/가정 2';
+				new_classname.push('기술/가정 2');
 	
-			} else if(i=='도덕') {
+			} else if(classname[i] === '도덕') {
 				// 도덕
-				classname[classname.indexOf(i)] = '도덕 2';
+				new_classname.push('도덕 2');
 	
-			} else if(i=='미술') {
+			} else if(classname[i] === '미술') {
 				// 미술
-				classname[classname.indexOf(i)] = '미술 1|2';
+				new_classname.push('미술 1|2');
 	
-			} else if(i=='수학') {
+			} else if(classname[i] === '수학') {
 				// 수학
-				classname[classname.indexOf(i)] = '수학 2';
+				new_classname.push('수학 2');
 	
-			} else if(i=='역사A') {
-				// 역사A
-				classname[classname.indexOf(i)] = '역사 1';
+			} else if(classname[i] === '역사A' || classname[i] === '역사B') {
+				// 역사A/B
+				new_classname.push('역사 1');
 	
-			} else if(i=='역사B') {
-				// 역사B
-				classname[classname.indexOf(i)] = '역사 1';
-	
-			} else if(i=='영어') {
+			} else if(classname[i] === '영어') {
 				// 영어
-				classname[classname.indexOf(i)] = 'English 2';
+				new_classname.push('English 2');
 	
-			} else if(i=='음악') {
+			} else if(classname[i] === '음악') {
 				// 음악
-				classname[classname.indexOf(i)] = '음악 1';
+				new_classname.push('음악 1');
 	
-			} else if(i=='중국어') {
+			} else if(classname[i] === '중국어') {
 				// 중국어
-				classname[classname.indexOf(i)] = '생활 중국어';
+				new_classname.push('생활 중국어');
 	
 			}
 		}
+		new_classname = new_classname.sort();
+		let unique_classname = new_classname.filter((c, index) => {
+			return new_classname.indexOf(c) === index;
+		});
+		bookname = unique_classname[0];
+		for(var i = 1; i < unique_classname.length; i++) {
+			bookname += ', '+unique_classname[i];
+		}
+		return bookname;
 	}
 
 	if(!msg.startsWith('!')) {
@@ -276,7 +283,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 	var command = msg[0] // 시간표
 	var arg0 = msg[1] // 월요일
 	var arg1 = msg[2] // asdf
-	var weekname = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요알'];
+	var weekname = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
 	
 
 	if(command === '시간표' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
@@ -326,6 +333,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		'- '+classname[6]+'\n'+
 		'= '+classlink[6]+'\n'+'\n');
 		return 0;
+
 	} else if(command === '시간표' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 		// !시간표 arg0
 		var classname = new Array(7);
@@ -345,7 +353,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				classlink[i] = '없음';
 			}
 		}
-		replier.reply('[ 오늘 시간표('+arg0+') ]\n'+'\n'+
+		replier.reply('[ 시간표 정보('+arg0+') ]\n'+'\n'+
 		'- 조회/종례\n'+
 		'= https://us02web.zoom.us/j/96392634458?pwd=QmgyM1dFbFpQd1A3SnN5eW9OY0ZRUT09\n'+'\n'+
 		'( 1교시 / 9:10~9:50 )\n'+
@@ -373,12 +381,18 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		'- '+classname[6]+'\n'+
 		'= '+classlink[6]+'\n'+'\n');
 		return 0;
+
 	} else if(command === '과목' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 		// !과목
 		var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
 		var weekname = weekname[weeknumber];
 		let timenow = new Date();
 		var classperiod = getCurrentPeriod(timenow.getHours()*60+timenow.getMinutes(), weeknumber);
+		if(weeknumber>=5) {
+			replier.reply('[ 알림 ]'+'\n'+'\n'+
+			'- 금일은 수업일이 아닙니다');
+			return 0;
+		}
 		if(classperiod[0] === -1 || classperiod[0] === 0.5 || classperiod[0] === 4.5 || classperiod[0] === 6.5 || classperiod[0] === 7.5) {
 			if(classperiod[0] === -1) {
 				replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -405,9 +419,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		'- '+classname+'\n'+
 		'= '+classlink);
 		return 0;
+
 	} else if(command === '과목' && typeof arg0 !== 'undefined') {
 		// !과목 arg0 arg1
-
 		if(arg0 === '검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
 			// !과목 검색 arg1
 			var classinformation = getClassInformation(arg1);
@@ -431,6 +445,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'- 허용되지 않은 전달인자입니다');
 				return 0;
+
 			} else {
 				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/specific.php?classnumber='+classinformation[0]).get().select('classlink').text();
 				replier.reply('[ 과목 정보 ]\n'+'\n'+
@@ -440,18 +455,46 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				'- 교시 : '+classinformation[3]);
 				return 0;
 			}
+
 		} else {
 			replier.reply('[ 오류 ]'+'\n'+'\n'+
 			'- 허용되지 않은 전달인자입니다');
 			return 0;
 		}
+
 	} else if(command === '책목록' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 		// !책목록
 		var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
 		var weekname = weekname[weeknumber];
+		var bookname = getBookName(weeknumber);
+		if(weeknumber>=5) {
+			replier.reply('[ 알림 ]'+'\n'+'\n'+
+			'- 금일은 수업일이 아닙니다');
+			return 0;
+		}
+		replier.reply('[ 책 정보('+weekname+') ]\n'+'\n'+
+		'- 책 목록\n'+
+		'= '+bookname);
+		return 0;
 		
 	} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 		// !책목록 arg0
+		var weeknumber = weekname.indexOf(arg0);
+		var bookname = getBookName(weeknumber);
+		if(weeknumber===-1) {
+			replier.reply('[ 오류 ]'+'\n'+'\n'+
+			'- 허용되지 않은 전달인자입니다');
+			return 0;
+		}
+		if(weeknumber>=5) {
+			replier.reply('[ 알림 ]'+'\n'+'\n'+
+			'- 당일은 수업일이 아닙니다');
+			return 0;
+		}
+		replier.reply('[ 책 정보('+arg0+') ]\n'+'\n'+
+		'- 책 목록\n'+
+		'= '+bookname);
+		return 0;
 	
 	} else if(command === '학생정보' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 		// 학생정보 arg0
