@@ -1,5 +1,5 @@
 const scriptName = 'UnOffi_SHMBot_2-4';
-const botVersion = '2020.9.4f5';
+const botVersion = '2020.9.4f6';
 /**
  * (string) room
  * (string) sender
@@ -506,7 +506,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 					if(typeof studentnumber === 'undefined') {
 						replier.reply('[ 오류 ]'+'\n'+'\n'+
 						'= 검색 결과가 없습니다');
-						throw '!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨';
+						throw Error('!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨');
 					}
 				} else {
 					replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -521,7 +521,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 					if(typeof studentnumber === 'undefined') {
 						replier.reply('[ 오류 ]'+'\n'+'\n'+
 						'= 검색 결과가 없습니다');
-						throw '!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨';
+						throw Error('!'+command+' '+arg0+' 실행중 오류 발생, 서버 다운 예상됨');
 					}
 				} else {
 					replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -553,17 +553,17 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '코로나' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !코로나
-			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("date").text();
-			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cases").text();
-			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("casesPREV").text();
-			var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cured").text();
-			var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("curedPREV").text();
-			var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaran").text();
-			var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("quaranPREV").text();
-			var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deaths").text();
-			var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("deathsPREV").text();
-			var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("dperc").text();
-			var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/getcoronadata.php").get().select("cperc").text();
+			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("date").text();
+			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cases").text();
+			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("casesPREV").text();
+			var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cured").text();
+			var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("curedPREV").text();
+			var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("quaran").text();
+			var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("quaranPREV").text();
+			var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("deaths").text();
+			var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("deathsPREV").text();
+			var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("dperc").text();
+			var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cperc").text();
 			replier.reply('[ 코로나 현황('+date+') ]'+'\n'+'\n'+
 			'( 확진자 )'+'\n'+
 			'= '+cases+' <오늘>'+'\n'+
@@ -589,10 +589,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			'- '+timenow.getHours()+'시 '+timenow.getMinutes()+'분');
 			return 0;
 			
-		} else if(command === '!호출' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
+		} else if(command === '호출' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !호출
+			replier.reply('[ 알림 ]'+'\n'+'\n'+
+			'= 개발자 호출됨');
 			replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 호출 ]'+'\n'+'\n'+
-			'= '+room+'에서 '+sender+'님에게 호출되었습니다');
+			'= ('+room+')에서 (@'+sender+')님에게 호출되었습니다');
 			return 0;
 			
 		} else if(command === '도움말' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
@@ -640,12 +642,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		}
 	} catch(e) {
-		Log.error(e+' @ line:'+e.lineNumber);
+		Log.error(e);
 		Api.makeNoti(e);
 		replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 오류 ]'+'\n'+'\n'+
 		'= 봇에서 오류가 발견되었습니다,'+'\n'+
-		'= 서버 상태 또는 봇 에러 로그를 확인해주세요'+'\n'+'\n'+
-		'- '+e+' @ line:'+e.lineNumber);
+		'= 서버 상태 또는 봇 코드를 확인해주세요'+'\n'+'\n'+
+		'- '+e);
 	}
 }
 
