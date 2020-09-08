@@ -1,5 +1,5 @@
 const scriptName = 'UnOffi_SHMBot_2-4';
-const botVersion = '2020.9.4f6';
+const botVersion = '2020.9.5f1';
 /**
  * (string) room
  * (string) sender
@@ -281,6 +281,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		msg = msg.split('!');
 		msg = msg[1];
 		msg = msg.split(' ');
+		var cmdnow = '';
 		// 예) !시간표 월요일 asdf
 		var command = msg[0] // 시간표
 		var arg0 = msg[1] // 월요일
@@ -291,6 +292,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		if(command === '시간표' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !시간표
+			cmdnow = '!시간표';
 			var classname = new Array(7);
 			var classlink = new Array(7);
 			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
@@ -339,6 +341,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '시간표' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 			// !시간표 arg0
+			cmdnow = '!시간표 arg0';
 			var classname = new Array(7);
 			var classlink = new Array(7);
 			var weeknumber = weekname.indexOf(arg0);
@@ -387,6 +390,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '과목' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !과목
+			cmdnow = '!과목';
 			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
 			var weekname = weekname[weeknumber];
 			let timenow = new Date();
@@ -427,6 +431,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			// !과목 arg0 arg1
 			if(arg0 === '교시검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
 				// !과목 교시검색 arg1
+				cmdnow = '!과목 교시검색 arg1';
 				var classinformation = getClassInformation(arg1);
 				var classname = classinformation[1];
 				if(classinformation[0] === -1) {
@@ -441,6 +446,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				}
 			} else if(arg0 === '정보검색' && typeof arg0 !== 'undefined' && typeof arg1 !== 'undefined') {
 				// !과목 정보검색 arg1
+				cmdnow = '!과목 정보검색 arg1';
 				var classinformation = getClassInformation(arg1);
 				var classname = classinformation[1];
 				if(classinformation[0] === -1) {
@@ -464,6 +470,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '책목록' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !책목록
+			cmdnow = '!책목록';
 			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
 			var weekname = weekname[weeknumber];
 			var bookname = getBookName(weeknumber);
@@ -478,6 +485,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			
 		} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 			// !책목록 arg0
+			cmdnow = '!책목록 arg0';
 			var weeknumber = weekname.indexOf(arg0);
 			var bookname = getBookName(weeknumber);
 			if(weeknumber===-1) {
@@ -496,6 +504,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		
 		} else if(command === '학생정보' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 			// !학생정보 arg0
+			cmdnow = '!학생정보 arg0';
 			var inttype = /^[0-9]/; 
 			var hangultype = /^[가-힣]/;
 			if(inttype.test(arg0)) {
@@ -542,6 +551,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			
 		} else if(command === '봇정보' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !봇정보
+			cmdnow = '!봇정보';
 			replier.reply('[ 봇정보 ]'+'\n'+'\n'+
 			'- 이름 : 비공식_신흥봇_2-4'+'\n'+
 			'- 버전 : '+botVersion+'\n'+
@@ -553,6 +563,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '코로나' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !코로나
+			cmdnow = '!코로나';
 			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("date").text();
 			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cases").text();
 			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("casesPREV").text();
@@ -584,6 +595,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		} else if(command === '시간' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !시간
+			cmdnow = '!시간';
 			let timenow = new Date();
 			replier.reply('[ 현재 시각 ]'+'\n'+'\n'+
 			'- '+timenow.getHours()+'시 '+timenow.getMinutes()+'분');
@@ -591,6 +603,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			
 		} else if(command === '호출' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !호출
+			cmdnow = '!호출';
 			replier.reply('[ 알림 ]'+'\n'+'\n'+
 			'= 개발자 호출됨');
 			replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 호출 ]'+'\n'+'\n'+
@@ -599,6 +612,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			
 		} else if(command === '도움말' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !도움말
+			cmdnow = '!도움말';
 			replier.reply('[ 도움말 ]'+'\n'+'\n'+
 			'- !도움말'+'\n'+
 			'= 지금 보고있는 도움말을 출력합니다'+'\n'+'\n'+
@@ -642,12 +656,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		}
 	} catch(e) {
-		Log.error(e);
-		Api.makeNoti(e);
+		Log.error(e+' @ '+cmdnow);
+		Api.makeNoti(e+' @ '+cmdnow);
 		replier.reply('ㄱㅣㅁㄱㅏㅇㅁㅣㄴ', '[ 오류 ]'+'\n'+'\n'+
 		'= 봇에서 오류가 발견되었습니다,'+'\n'+
 		'= 서버 상태 또는 봇 코드를 확인해주세요'+'\n'+'\n'+
-		'- '+e);
+		'- '+e+' @ '+cmdnow);
 	}
 }
 
