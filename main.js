@@ -85,11 +85,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			// 종례 수업중
 			classperiod = [6.5, '종례', '14:50~15:10', true];
 
-		} else if(840 <= minutes && minutes < 850 && weeknumber == 4) {
+		} else if(840 <= minutes && minutes < 850 && weeknumber === 4) {
 			// 금요일 6교시 10분전
 			classperiod = [6, '6교시', '14:10~14:50', false];
 
-		} else if(850 <= minutes && minutes < 890 && weeknumber == 4) {
+		} else if(850 <= minutes && minutes < 890 && weeknumber === 4) {
 			// 금요일 6교시 수업중
 			classperiod = [6, '6교시', '14:10~14:50', true];
 
@@ -212,7 +212,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		var new_classname = new Array();
 		var bookname;
 		for(var i = 0; i<=6; i++) {
-			classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
+			classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
 			if(classname[i] === '없음') {
 				delete classname[i];
 			}
@@ -295,7 +295,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			cmdnow = '!시간표';
 			var classname = new Array(7);
 			var classlink = new Array(7);
-			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text();
 			var weekname = weekname[weeknumber];
 			if(weeknumber>=5) {
 				replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -303,8 +303,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				return 0;
 			}
 			for(var i = 0; i<=6; i++) {
-				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
-				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
 				if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
 					classname[i] = '없음';
 					classlink[i] = '없음';
@@ -344,7 +344,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			cmdnow = '!시간표 arg0';
 			var classname = new Array(7);
 			var classlink = new Array(7);
-			var weeknumber = weekname.indexOf(arg0);
+			if(arg0 === '내일') {
+				var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text()+1;
+				if(weeknumber > 6) {
+					weeknumber -= 7;
+				}
+			} else {
+				var weeknumber = weekname.indexOf(arg0);
+			}
 			if(weeknumber===-1) {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'= 허용되지 않은 전달인자입니다');
@@ -352,8 +359,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			}
 			var weekname = weekname[weeknumber];
 			for(var i = 0; i<=6; i++) {
-				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
-				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
+				classname[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/informations.php?weeknumber='+weeknumber).get().select('classname'+(i+1)).text();
+				classlink[i] = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/informations.php?weeknumber='+weeknumber).get().select('classlink'+(i+1)).text();
 				if(typeof classname[i] === 'undefined' && typeof classlink[i] === 'undefined') {
 					classname[i] = '없음';
 					classlink[i] = '없음';
@@ -391,7 +398,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		} else if(command === '과목' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !과목
 			cmdnow = '!과목';
-			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text();
 			var weekname = weekname[weeknumber];
 			let timenow = new Date();
 			var classperiod = getCurrentPeriod(timenow.getHours()*60+timenow.getMinutes(), weeknumber);
@@ -410,11 +417,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				} else {
 					classperiod[0] -= 0.5;
 				}
-				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classname').text();
-				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classlink').text();
+				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classname').text();
+				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/information.php?weeknumber=255&classnumber='+classperiod[0]).get().select('classlink').text();
 			} else {
-				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classname').text();
-				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classlink').text();
+				var classname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classname').text();
+				var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/information.php?weeknumber='+weeknumber+'&classnumber='+classperiod[0]).get().select('classlink').text();
 			}
 			if(classperiod[3]) {
 				classperiod[3] = '';
@@ -454,7 +461,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 					'= 허용되지 않은 전달인자입니다');
 					return 0;
 				} else {
-					var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/class/specific.php?classnumber='+classinformation[0]).get().select('classlink').text();
+					var classlink = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/class/specific.php?classnumber='+classinformation[0]).get().select('classlink').text();
 					replier.reply('[ 과목 정보 ]'+'\n'+'\n'+
 					'( 과목 '+classname+'의 정보 )'+'\n'+
 					'- 선생님 : '+classinformation[2]+'쌤'+'\n'+
@@ -471,7 +478,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		} else if(command === '책목록' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !책목록
 			cmdnow = '!책목록';
-			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/week/number.php').get().select('currentweek').text();
+			var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text();
 			var weekname = weekname[weeknumber];
 			var bookname = getBookName(weeknumber);
 			if(weeknumber>=5) {
@@ -486,7 +493,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 			// !책목록 arg0
 			cmdnow = '!책목록 arg0';
-			var weeknumber = weekname.indexOf(arg0);
+			if(arg0 === '내일') {
+				var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text()+1;
+				if(weeknumber > 6) {
+					weeknumber -= 7;
+				}
+			} else {
+				var weeknumber = weekname.indexOf(arg0);
+			}
 			var bookname = getBookName(weeknumber);
 			if(weeknumber===-1) {
 				replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -509,9 +523,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			var hangultype = /^[가-힣]/;
 			if(inttype.test(arg0)) {
 				if(1 <= arg0 && arg0 <= 27 || 2401 <= arg0 && arg0 <= 2427) {
-					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentnumber').text();
-					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentname').text();
-					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentnumber='+arg0).get().select('studentclub').text();
+					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentnumber='+arg0).get().select('studentnumber').text();
+					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentnumber='+arg0).get().select('studentname').text();
+					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentnumber='+arg0).get().select('studentclub').text();
 					if(typeof studentnumber === 'undefined') {
 						replier.reply('[ 오류 ]'+'\n'+'\n'+
 						'= 검색 결과가 없습니다');
@@ -524,9 +538,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 				}
 			} else if(hangultype.test(arg0)) {
 				if(studentname.indexOf(arg0) !== -1) {
-					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentnumber').text();
-					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentname').text();
-					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/get/student/information.php?studentname='+arg0).get().select('studentclub').text();
+					var studentnumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentname='+arg0).get().select('studentnumber').text();
+					var studentname = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentname='+arg0).get().select('studentname').text();
+					var studentclub = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/student/information.php?studentname='+arg0).get().select('studentclub').text();
 					if(typeof studentnumber === 'undefined') {
 						replier.reply('[ 오류 ]'+'\n'+'\n'+
 						'= 검색 결과가 없습니다');
@@ -564,17 +578,17 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		} else if(command === '코로나' && typeof arg0 === 'undefined' && typeof arg1 === 'undefined') {
 			// !코로나
 			cmdnow = '!코로나';
-			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("date").text();
-			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cases").text();
-			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("casesPREV").text();
-			var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cured").text();
-			var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("curedPREV").text();
-			var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("quaran").text();
-			var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("quaranPREV").text();
-			var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("deaths").text();
-			var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("deathsPREV").text();
-			var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("dperc").text();
-			var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/get/corona/data.php").get().select("cperc").text();
+			var date = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("date").text();
+			var cases = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("cases").text();
+			var casesPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("casesPREV").text();
+			var cured = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("cured").text();
+			var curedPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("curedPREV").text();
+			var quaran = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("quaran").text();
+			var quaranPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("quaranPREV").text();
+			var deaths = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("deaths").text();
+			var deathsPREV = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("deathsPREV").text();
+			var dperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("dperc").text();
+			var cperc = org.jsoup.Jsoup.connect("https://api.h2owr.xyz/legacy/get/corona/data.php").get().select("cperc").text();
 			replier.reply('[ 코로나 현황('+date+') ]'+'\n'+'\n'+
 			'( 확진자 )'+'\n'+
 			'= '+cases+' <오늘>'+'\n'+
@@ -620,7 +634,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			'- !시간표'+'\n'+
 			'= 현재 요일에 따라서 시간표를 출력합니다'+'\n'+'\n'+
 
-			'- !시간표 <월~금>요일'+'\n'+
+			'- !시간표 <월요일~금요일|내일>'+'\n'+
 			'= 요일별 시간표를 출력합니다'+'\n'+'\n'+
 
 			'- !과목'+'\n'+
@@ -632,13 +646,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			'- !과목 정보검색 <국어~종례>'+'\n'+
 			'= 과목별  정보를 출력합니다'+'\n'+'\n'+
 
-			'- !학생정보 <(240)1~(24)27/김강민~황재성>'+'\n'+
+			'- !학생정보 <(240)1~(24)27|김강민~황재성>'+'\n'+
 			'= 꺾쇠 안의 조건에 따라, 학생정보를 출력합니다.'+'\n'+'\n'+
 
 			'- !책목록'+'\n'+
 			'= 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
 
-			'- !책목록 <월~금>요일'+'\n'+
+			'- !책목록 <월요일~금요일|내일>'+'\n'+
 			'= 꺾쇠 안의 조건에 따라, 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
 
 			'- !코로나'+'\n'+
