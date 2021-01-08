@@ -344,7 +344,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			cmdnow = '!시간표 arg0';
 			var classname = new Array(7);
 			var classlink = new Array(7);
-			var weeknumber = weekname.indexOf(arg0);
+			if(arg0 === '내일') {
+				var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text()+1;
+				if(weeknumber > 6) {
+					weeknumber -= 7;
+				}
+			} else {
+				var weeknumber = weekname.indexOf(arg0);
+			}
 			if(weeknumber===-1) {
 				replier.reply('[ 오류 ]'+'\n'+'\n'+
 				'= 허용되지 않은 전달인자입니다');
@@ -486,7 +493,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		} else if(command === '책목록' && typeof arg0 !== 'undefined' && typeof arg1 === 'undefined') {
 			// !책목록 arg0
 			cmdnow = '!책목록 arg0';
-			var weeknumber = weekname.indexOf(arg0);
+			if(arg0 === '내일') {
+				var weeknumber = org.jsoup.Jsoup.connect('https://api.h2owr.xyz/legacy/get/week/number.php').get().select('currentweek').text()+1;
+				if(weeknumber > 6) {
+					weeknumber -= 7;
+				}
+			} else {
+				var weeknumber = weekname.indexOf(arg0);
+			}
 			var bookname = getBookName(weeknumber);
 			if(weeknumber===-1) {
 				replier.reply('[ 알림 ]'+'\n'+'\n'+
@@ -620,7 +634,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			'- !시간표'+'\n'+
 			'= 현재 요일에 따라서 시간표를 출력합니다'+'\n'+'\n'+
 
-			'- !시간표 <월~금>요일'+'\n'+
+			'- !시간표 <월요일~금요일|내일>'+'\n'+
 			'= 요일별 시간표를 출력합니다'+'\n'+'\n'+
 
 			'- !과목'+'\n'+
@@ -632,13 +646,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			'- !과목 정보검색 <국어~종례>'+'\n'+
 			'= 과목별  정보를 출력합니다'+'\n'+'\n'+
 
-			'- !학생정보 <(240)1~(24)27/김강민~황재성>'+'\n'+
+			'- !학생정보 <(240)1~(24)27|김강민~황재성>'+'\n'+
 			'= 꺾쇠 안의 조건에 따라, 학생정보를 출력합니다.'+'\n'+'\n'+
 
 			'- !책목록'+'\n'+
 			'= 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
 
-			'- !책목록 <월~금>요일'+'\n'+
+			'- !책목록 <월요일~금요일|내일>'+'\n'+
 			'= 꺾쇠 안의 조건에 따라, 해당 요일에 준비해야 하는 책의 목록을 출력합니다'+'\n'+'\n'+
 
 			'- !코로나'+'\n'+
