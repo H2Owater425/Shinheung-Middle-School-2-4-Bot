@@ -1,5 +1,5 @@
 const scriptName = 'UnOffi_SHMBot_2-4';
-const botVersion = '2020.9.5f1';
+const botVersion = '2021.1.1';
 /**
  * (string) room
  * (string) sender
