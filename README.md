@@ -1,7 +1,7 @@
 # Shinheung-Middle-School-2-4-Bot
 Javascript for my KakaoTalk bot in my middle school's class.
 ## Introduction
-> #### PLEASE DO NOT USE THIS CODE TO YOUR PROJECT
+> ### **PLEASE DO NOT USE THIS CODE TO YOUR PROJECT**
 >
 > This is code for korean messenger **kakaotalk**'s unofficial api
 >
