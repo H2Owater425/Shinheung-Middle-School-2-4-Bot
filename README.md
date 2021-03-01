@@ -1,4 +1,4 @@
-# Shinheung-Middle-School-2-4-Bot
+# Shinheung-Middle-School-Kakaotalk-Bot
 Javascript for my KakaoTalk bot in my middle school's class.
 ## Introduction
 > #### PLEASE DO NOT USE THIS CODE TO YOUR PROJECT
